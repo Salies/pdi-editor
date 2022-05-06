@@ -7,7 +7,7 @@ class divideRGB :
 {
     Q_OBJECT
 public:
-    divideRGB(QImage img);
+    divideRGB(const QImage& img, QWidget* parent = Q_NULLPTR);
 private:
     Ui::dividergb_class ui;
 };

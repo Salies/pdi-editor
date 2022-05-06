@@ -97,6 +97,7 @@ void editor::inverteColorido() {
 
 void editor::dividirRGB() {
     divideRGB* d = new divideRGB(img);
+    d->setAttribute(Qt::WA_DeleteOnClose, true);
     d->show();
 }
 
@@ -116,8 +117,10 @@ void editor::copiaParaEsquerda() {
 void editor::atualizarPos(int x, int y) {
     if (!img.valid(x, y)) return;
 
-    corAtual->setPalette(img.pixelColor(x, y));
-    sbMsg->setText("<b>x:</b> " + QString::number(x) + ", <b>y:</b> " + QString::number(y));
+    QColor cor = img.pixelColor(x, y);
+    corAtual->setPalette(cor);
+    sbMsg->setText("<b>x:</b> " + QString::number(x) + ", <b>y:</b> " + QString::number(y) +
+    ", <b>cor:</b> RGB(" + QString::number(cor.red()) + ", " + QString::number(cor.green()) + ", " + QString::number(cor.blue()) + ")");
 }
 
 // TODO STRETCHER
