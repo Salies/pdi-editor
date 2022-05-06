@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1610</width>
-    <height>552</height>
+    <width>1616</width>
+    <height>554</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,107 +18,77 @@
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>512</width>
-     <height>512</height>
+     <width>514</width>
+     <height>514</height>
     </rect>
    </property>
    <property name="widgetResizable">
     <bool>true</bool>
    </property>
-   <widget class="QWidget" name="scrollAreaWidgetContents">
+   <widget class="QLabel" name="imgL1">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>510</width>
-      <height>510</height>
+      <width>512</width>
+      <height>512</height>
      </rect>
     </property>
-    <widget class="QLabel" name="imgL1">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>512</width>
-       <height>512</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QScrollArea" name="scrollArea_2">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>552</x>
      <y>20</y>
-     <width>512</width>
-     <height>512</height>
+     <width>514</width>
+     <height>514</height>
     </rect>
    </property>
    <property name="widgetResizable">
     <bool>true</bool>
    </property>
-   <widget class="QWidget" name="scrollAreaWidgetContents_2">
+   <widget class="QLabel" name="imgL2">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>510</width>
-      <height>510</height>
+      <width>512</width>
+      <height>512</height>
      </rect>
     </property>
-    <widget class="QLabel" name="imgL2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>512</width>
-       <height>512</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QScrollArea" name="scrollArea_3">
    <property name="geometry">
     <rect>
-     <x>1080</x>
+     <x>1082</x>
      <y>20</y>
-     <width>512</width>
-     <height>512</height>
+     <width>514</width>
+     <height>514</height>
     </rect>
    </property>
    <property name="widgetResizable">
     <bool>true</bool>
    </property>
-   <widget class="QWidget" name="scrollAreaWidgetContents_3">
+   <widget class="QLabel" name="imgL3">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>510</width>
-      <height>510</height>
+      <width>512</width>
+      <height>512</height>
      </rect>
     </property>
-    <widget class="QLabel" name="imgL3">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>512</width>
-       <height>512</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
  </widget>

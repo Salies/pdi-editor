@@ -1,19 +1,30 @@
 #include "divideRGB.h"
 
-divideRGB::divideRGB(QImage img) {
+divideRGB::divideRGB(QImage *img) {
 	ui.setupUi(this);
 
-	// Divindindo a imagem para os três canais
-	QColor cor;
+	QImage& aux = *img;
+	if (img->isGrayscale())
+		aux = img->convertToFormat(QImage::Format_ARGB32);
 	// copia apenas para terem algum dado, e o mesmo tamanho
-	QImage red = img, green = img, blue = img;
-	for (int i = 0; i < img.width(); i++) {
-		for (int j = 0; j < img.height(); j++) {
-			cor = img.pixelColor(i, j);
-			red.setPixelColor(i, j, QColor(cor.red(), 0, 0));
-			green.setPixelColor(i, j, QColor(0, cor.green(), 0));
-			blue.setPixelColor(i, j, QColor(0, 0, cor.blue()));
-		}
+	QImage red = aux.copy(), green = aux.copy(), blue = aux.copy();
+	uchar* bits = aux.bits(), * redBits = red.bits(), * greenBits = green.bits(), * blueBits = blue.bits();
+	for (int i = 0; i < (img->width() * img->height() * 4); i += 4)
+	{
+		// bits[i] = azul
+		// bits[i + 1] = verde
+		// bits [i + 2] = vermelho
+		// imagem azul
+		blueBits[i + 1] = 0;
+		blueBits[i + 2] = 0;
+
+		// imagem verde
+		greenBits[i] = 0;
+		greenBits[i + 2] = 0;
+
+		// imagem vermelha
+		redBits[i] = 0;
+		redBits[i + 1] = 0;
 	}
 	
 	// Imprimindo (colocando nos pixmaps/labels)

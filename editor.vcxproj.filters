@@ -43,6 +43,9 @@
     <ClCompile Include="divideRGB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mainlabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="sobre.ui">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="divideRGB.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="mainlabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

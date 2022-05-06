@@ -13,10 +13,13 @@ public:
 private:
     Ui::editorClass ui;
     QImage img, imgB; // imagem a ser manipulada
+    QLabel *sbMsg;
+    void atualizarPos(int x, int y);
 
 private slots:
     // Arquivo
     void abrir();
+    void salvar();
     // Operações
     void converteParaCinza();
     void dividirRGB();
