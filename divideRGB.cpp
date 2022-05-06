@@ -1,15 +1,16 @@
 #include "divideRGB.h"
+#include <QDebug>
 
-divideRGB::divideRGB(QImage *img) {
+divideRGB::divideRGB(QImage img) {
 	ui.setupUi(this);
 
-	QImage& aux = *img;
-	if (img->isGrayscale())
-		aux = img->convertToFormat(QImage::Format_ARGB32);
+	QImage aux = img;
+	if (img.isGrayscale())
+		aux = img.convertToFormat(QImage::Format_ARGB32);
 	// copia apenas para terem algum dado, e o mesmo tamanho
 	QImage red = aux.copy(), green = aux.copy(), blue = aux.copy();
 	uchar* bits = aux.bits(), * redBits = red.bits(), * greenBits = green.bits(), * blueBits = blue.bits();
-	for (int i = 0; i < (img->width() * img->height() * 4); i += 4)
+	for (int i = 0; i < (img.width() * img.height() * 4); i += 4)
 	{
 		// bits[i] = azul
 		// bits[i + 1] = verde

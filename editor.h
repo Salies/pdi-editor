@@ -14,6 +14,7 @@ private:
     Ui::editorClass ui;
     QImage img, imgB; // imagem a ser manipulada
     QLabel *sbMsg;
+    QWidget* corAtual;
     void atualizarPos(int x, int y);
 
 private slots:

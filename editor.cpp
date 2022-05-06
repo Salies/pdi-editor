@@ -12,7 +12,12 @@ editor::editor(QWidget *parent)
 
     // Define mensagem padrão da statusBar (onde são mostrados os pixels)
     sbMsg = new QLabel("<b>x:</b> 0, <b>y:</b> 0, <b>cor:</b> RGB(0, 0, 0)");
+    corAtual = new QWidget();
+    corAtual->setFixedSize(32, 16);
+    corAtual->setAutoFillBackground(true);
+
     ui.statusBar->addWidget(sbMsg);
+    ui.statusBar->addWidget(corAtual);
 
     // Conexões (coneta a ação do menu/botões a uma função)
     connect(ui.pushButton, &QPushButton::clicked, this, &editor::copiaParaEsquerda);
@@ -34,6 +39,8 @@ void editor::abrir() {
     img.load(arquivoEscolhido);
     // Redimensionando o QLabel para que ele exiba toda a imagem
     ui.label_img1->resize(img.width(), img.height());
+
+    qDebug() << img.format();
 
     ui.label_img1->setPixmap(QPixmap::fromImage(img));
 }
@@ -89,7 +96,7 @@ void editor::inverteColorido() {
 }
 
 void editor::dividirRGB() {
-    divideRGB* d = new divideRGB(&img);
+    divideRGB* d = new divideRGB(img);
     d->show();
 }
 
@@ -109,9 +116,8 @@ void editor::copiaParaEsquerda() {
 void editor::atualizarPos(int x, int y) {
     if (!img.valid(x, y)) return;
 
-    QColor cor = img.pixelColor(x, y);
-    sbMsg->setText("<b>x:</b> " + QString::number(x) + ", <b>y:</b> " + QString::number(y) + 
-        ", <b>cor:</b> RGB(" + QString::number(cor.red()) + ", " + QString::number(cor.green()) + ", " + QString::number(cor.blue()) + ")");
+    corAtual->setPalette(img.pixelColor(x, y));
+    sbMsg->setText("<b>x:</b> " + QString::number(x) + ", <b>y:</b> " + QString::number(y));
 }
 
 // TODO STRETCHER

@@ -1,3 +1,6 @@
 ﻿  Reading Qt configuration (D:/Qt/5.15.1/msvc2019/bin/qmake)
+  moc divideRGB.h
+  divideRGB.cpp
   editor.cpp
+  moc_divideRGB.cpp
   editor.vcxproj -> D:\Documentos\Unesp\PDI\pdi-editor\Debug\editor.exe
