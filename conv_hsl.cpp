@@ -13,6 +13,9 @@ conv_hsl::conv_hsl(QWidget* parent) {
 	mostraCor->setPalette(QPalette(QColor(0, 0, 0)));
 
 	ui.gridLayout->addWidget(mostraCor, 4, 0, 1, 4);
+
+	connect(ui.buttonToRGB, &QPushButton::clicked, this, &conv_hsl::convertHSLtoRGB);
+	connect(ui.buttonToHSL, &QPushButton::clicked, this, &conv_hsl::convertRGBtoHSL);
 }
 
 // Fórmula usada: https://www.rapidtables.com/convert/color/rgb-to-hsl.html
@@ -75,4 +78,22 @@ void conv_hsl::HSLtoRGB(int h, int s, int l, int* r, int* g, int* b) {
 	*r = f(0, hh, ss, ll);
 	*g = f(8, hh, ss, ll);
 	*b = f(4, hh, ss, ll);
+}
+
+void conv_hsl::convertRGBtoHSL() {
+	int h, s, l, r = ui.spinR->value(), g = ui.spinG->value(), b = ui.spinB->value();
+	mostraCor->setPalette(QPalette(QColor(r, g, b)));
+	RGBtoHSL(r, g, b, &h, &s, &l);
+	ui.spinH->setValue(h);
+	ui.spinS->setValue(s);
+	ui.spinL->setValue(l);
+}
+
+void conv_hsl::convertHSLtoRGB() {
+	int r, g, b;
+	HSLtoRGB(ui.spinH->value(), ui.spinS->value(), ui.spinL->value(), &r, &g, &b);
+	mostraCor->setPalette(QPalette(QColor(r, g, b)));
+	ui.spinR->setValue(r);
+	ui.spinG->setValue(g);
+	ui.spinB->setValue(b);
 }
