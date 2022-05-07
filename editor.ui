@@ -130,6 +130,8 @@
     </property>
     <addaction name="action_Abrir"/>
     <addaction name="actionSalvar"/>
+    <addaction name="separator"/>
+    <addaction name="actionSair"/>
    </widget>
    <widget class="QMenu" name="menu_Operacoes">
     <property name="title">
@@ -205,6 +207,11 @@
   <action name="actionConverter_RGB_HSL">
    <property name="text">
     <string>Converter RGB/HSL</string>
+   </property>
+  </action>
+  <action name="actionSair">
+   <property name="text">
+    <string>Sair</string>
    </property>
   </action>
  </widget>

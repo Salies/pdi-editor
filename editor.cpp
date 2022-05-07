@@ -21,6 +21,7 @@ editor::editor(QWidget *parent)
     ui.statusBar->addWidget(corAtual);
 
     // Conexões (coneta a ação do menu/botões a uma função)
+    connect(ui.actionSair, &QAction::triggered, this, &editor::sair);
     connect(ui.pushButton, &QPushButton::clicked, this, &editor::copiaParaEsquerda);
     connect(ui.action_Abrir, &QAction::triggered, this, &editor::abrir);
     connect(ui.action_paraCinza, &QAction::triggered, this, &editor::converteParaCinza);
@@ -47,6 +48,12 @@ void editor::abrir() {
 void editor::salvar() {
     QString arquivoSalvar = QFileDialog::getSaveFileName(this, tr("Salvar imagem"), "imagem.bmp", tr("Bitmap (*bmp);"));
     img.save(arquivoSalvar);
+}
+
+void editor::sair() {
+    close(); 
+    // O QApplication é automaticamente terminado quando sua última janela (no caso a principal) é fechada
+    // setQuitOnLastWindowClosed é true por padrão
 }
 
 // Operações
@@ -102,7 +109,7 @@ void editor::dividirRGB() {
 // Ajuda
 void editor::janelaSobre() {
     sobre *s = new sobre();
-    s->show();
+    s->exec();
 }
 
 // Outros

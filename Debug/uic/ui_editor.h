@@ -37,6 +37,7 @@ public:
     QAction *actionInverte_colorida;
     QAction *actionSalvar;
     QAction *actionConverter_RGB_HSL;
+    QAction *actionSair;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QScrollArea *scroll_img1;
@@ -74,6 +75,8 @@ public:
         actionSalvar->setObjectName(QString::fromUtf8("actionSalvar"));
         actionConverter_RGB_HSL = new QAction(editorClass);
         actionConverter_RGB_HSL->setObjectName(QString::fromUtf8("actionConverter_RGB_HSL"));
+        actionSair = new QAction(editorClass);
+        actionSair->setObjectName(QString::fromUtf8("actionSair"));
         centralWidget = new QWidget(editorClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -146,6 +149,8 @@ public:
         menuBar->addAction(menuAjuda->menuAction());
         menu_Arquivo->addAction(action_Abrir);
         menu_Arquivo->addAction(actionSalvar);
+        menu_Arquivo->addSeparator();
+        menu_Arquivo->addAction(actionSair);
         menu_Operacoes->addAction(actionInverte_cinza);
         menu_Operacoes->addSeparator();
         menu_Operacoes->addAction(action_paraCinza);
@@ -174,6 +179,7 @@ public:
         actionInverte_colorida->setText(QCoreApplication::translate("editorClass", "Inverter imagem colorida", nullptr));
         actionSalvar->setText(QCoreApplication::translate("editorClass", "Salvar", nullptr));
         actionConverter_RGB_HSL->setText(QCoreApplication::translate("editorClass", "Converter RGB/HSL", nullptr));
+        actionSair->setText(QCoreApplication::translate("editorClass", "Sair", nullptr));
         label_img1->setProperty("text", QVariant(QString()));
         pushButton->setText(QCoreApplication::translate("editorClass", "\360\237\241\204", nullptr));
         label_img2->setText(QString());

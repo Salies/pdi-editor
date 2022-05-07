@@ -20,6 +20,7 @@ private slots:
     // Arquivo
     void abrir();
     void salvar();
+    void sair();
     // Operações
     void converteParaCinza();
     void dividirRGB();

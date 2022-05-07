@@ -1,9 +1,9 @@
 #pragma once
 
-#include <QWidget>
+#include <QDialog>
 #include "ui_sobre.h"
 
-class sobre : public QWidget {
+class sobre : public QDialog {
 	Q_OBJECT
 public:
 	sobre() {
