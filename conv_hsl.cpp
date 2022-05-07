@@ -60,6 +60,13 @@ void conv_hsl::RGBtoHSL(int r, int g, int b, int* h, int* s, int* l) {
 }
 
 
+float conv_hsl::f(int n, float H, float S, float L) {
+	float k = std::fmod((n + (H / 30.0f)), 12.0f);
+	float a = S * std::min(L, 1.0f - L);
+	return std::round((L - a * std::max(-1.0f, std::min({ k - 3.0f, 9.0f - k, 1.0f })))*255.0f);
+}
+
+// TODO: tentar melhorar pro caso de teste RGB(164, 235, 255)
 // Fórmula parcialmente usada: https://www.rapidtables.com/convert/color/hsl-to-rgb.html
 void conv_hsl::HSLtoRGB(int h, int s, int l, int* r, int* g, int* b) {
 	// Imagem sem saturação alguma (ou seja, preta)
@@ -68,23 +75,9 @@ void conv_hsl::HSLtoRGB(int h, int s, int l, int* r, int* g, int* b) {
 		return;
 	}
 
-	// Recuperando os valores nas escalas originais
 	float hh = (h / 2.0f) * 3.0f, ss = s / 240.0f, ll = l / 240.0f, rr = 0, gg = 0, bb = 0;
-	// Verifica l < (1/2) ao invés de fazer mod 2 (não dá pra fazer com float)
-	float C = (1.0f - std::abs((2 * ll) - 1.0f)) * ss;
-	float X = C * (1.0f - std::abs(std::fmod((hh / 60.0f), 2.0f) - 1.0f));
-	float m = ll - (C / 2.0f);
-	h = std::floor(hh / 60.0f);
-	switch (h) {
-		case 0: rr = C; gg = X; bb = 0; break;
-		case 1: rr = X; gg = C; bb = 0; break;
-		case 2: rr = 0; gg = C; bb = X; break;
-		case 3: rr = 0; gg = X; bb = C; break;
-		case 4: rr = X; gg = 0; bb = C; break;
-		default: rr = C; gg = 0; bb = X; break;
-	}
-	qDebug() << (gg + m) * 255.0f;
-	*r = std::round((rr + m) * 255.0f);
-	*g = std::round((gg + m) * 255.0f);
-	*b = std::round((bb + m) * 255.0f);
+
+	*r = f(0, hh, ss, ll);
+	*g = f(8, hh, ss, ll);
+	*b = f(4, hh, ss, ll);
 }
