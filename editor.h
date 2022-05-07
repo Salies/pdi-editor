@@ -15,7 +15,6 @@ private:
     QImage img, imgB; // imagem a ser manipulada
     QLabel *sbMsg;
     QWidget* corAtual;
-    void atualizarPos(int x, int y);
 
 private slots:
     // Arquivo
@@ -30,4 +29,6 @@ private slots:
     void janelaSobre();
     // Outros
     void copiaParaEsquerda();
+    void converterRGB_HSL();
+    void atualizarPos(int x, int y);
 };

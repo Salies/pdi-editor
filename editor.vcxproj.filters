@@ -46,12 +46,18 @@
     <ClCompile Include="mainlabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="conv_hsl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="sobre.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="divideRGB.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="conv_hsl.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -63,6 +69,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="mainlabel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="conv_hsl.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

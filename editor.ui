@@ -150,8 +150,15 @@
     <addaction name="separator"/>
     <addaction name="actionSobre"/>
    </widget>
+   <widget class="QMenu" name="menuOutros">
+    <property name="title">
+     <string>Utilitários</string>
+    </property>
+    <addaction name="actionConverter_RGB_HSL"/>
+   </widget>
    <addaction name="menu_Arquivo"/>
    <addaction name="menu_Operacoes"/>
+   <addaction name="menuOutros"/>
    <addaction name="menuAjuda"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -193,6 +200,11 @@
   <action name="actionSalvar">
    <property name="text">
     <string>Salvar</string>
+   </property>
+  </action>
+  <action name="actionConverter_RGB_HSL">
+   <property name="text">
+    <string>Converter RGB/HSL</string>
    </property>
   </action>
  </widget>

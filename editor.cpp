@@ -1,6 +1,7 @@
 #include "editor.h"
 #include "sobre.h"
 #include "divideRGB.h"
+#include "conv_hsl.h"
 #include <QFileDialog>
 
 #include<QDebug>
@@ -29,6 +30,7 @@ editor::editor(QWidget *parent)
     connect(ui.actionInverte_colorida, &QAction::triggered, this, &editor::inverteColorido);
     connect(ui.actionSalvar, &QAction::triggered, this, &editor::salvar);
     connect(ui.label_img1, &MainLabel::novaPos, this, &editor::atualizarPos);
+    connect(ui.actionConverter_RGB_HSL, &QAction::triggered, this, &editor::converterRGB_HSL);
 }
 
 // Arquivo
@@ -39,9 +41,6 @@ void editor::abrir() {
     img.load(arquivoEscolhido);
     // Redimensionando o QLabel para que ele exiba toda a imagem
     ui.label_img1->resize(img.width(), img.height());
-
-    qDebug() << img.format();
-
     ui.label_img1->setPixmap(QPixmap::fromImage(img));
 }
 
@@ -97,7 +96,6 @@ void editor::inverteColorido() {
 
 void editor::dividirRGB() {
     divideRGB* d = new divideRGB(img);
-    d->setAttribute(Qt::WA_DeleteOnClose, true);
     d->show();
 }
 
@@ -121,6 +119,11 @@ void editor::atualizarPos(int x, int y) {
     corAtual->setPalette(cor);
     sbMsg->setText("<b>x:</b> " + QString::number(x) + ", <b>y:</b> " + QString::number(y) +
     ", <b>cor:</b> RGB(" + QString::number(cor.red()) + ", " + QString::number(cor.green()) + ", " + QString::number(cor.blue()) + ")");
+}
+
+void editor::converterRGB_HSL() {
+    conv_hsl* conv = new conv_hsl();
+    conv->show();
 }
 
 // TODO STRETCHER

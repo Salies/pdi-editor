@@ -85,8 +85,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="conv_hsl.cpp" />
     <ClCompile Include="mainlabel.cpp" />
     <QtRcc Include="editor.qrc" />
+    <QtUic Include="conv_hsl.ui" />
     <QtUic Include="divideRGB.ui" />
     <QtUic Include="editor.ui" />
     <QtMoc Include="editor.h" />
@@ -103,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainlabel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="conv_hsl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -36,6 +36,7 @@ public:
     QAction *actionInverte_cinza;
     QAction *actionInverte_colorida;
     QAction *actionSalvar;
+    QAction *actionConverter_RGB_HSL;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QScrollArea *scroll_img1;
@@ -47,6 +48,7 @@ public:
     QMenu *menu_Arquivo;
     QMenu *menu_Operacoes;
     QMenu *menuAjuda;
+    QMenu *menuOutros;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *editorClass)
@@ -70,6 +72,8 @@ public:
         actionInverte_colorida->setObjectName(QString::fromUtf8("actionInverte_colorida"));
         actionSalvar = new QAction(editorClass);
         actionSalvar->setObjectName(QString::fromUtf8("actionSalvar"));
+        actionConverter_RGB_HSL = new QAction(editorClass);
+        actionConverter_RGB_HSL->setObjectName(QString::fromUtf8("actionConverter_RGB_HSL"));
         centralWidget = new QWidget(editorClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -129,6 +133,8 @@ public:
         menu_Operacoes->setObjectName(QString::fromUtf8("menu_Operacoes"));
         menuAjuda = new QMenu(menuBar);
         menuAjuda->setObjectName(QString::fromUtf8("menuAjuda"));
+        menuOutros = new QMenu(menuBar);
+        menuOutros->setObjectName(QString::fromUtf8("menuOutros"));
         editorClass->setMenuBar(menuBar);
         statusBar = new QStatusBar(editorClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -136,6 +142,7 @@ public:
 
         menuBar->addAction(menu_Arquivo->menuAction());
         menuBar->addAction(menu_Operacoes->menuAction());
+        menuBar->addAction(menuOutros->menuAction());
         menuBar->addAction(menuAjuda->menuAction());
         menu_Arquivo->addAction(action_Abrir);
         menu_Arquivo->addAction(actionSalvar);
@@ -148,6 +155,7 @@ public:
         menuAjuda->addAction(actionGuia_b_sico);
         menuAjuda->addSeparator();
         menuAjuda->addAction(actionSobre);
+        menuOutros->addAction(actionConverter_RGB_HSL);
 
         retranslateUi(editorClass);
 
@@ -165,12 +173,14 @@ public:
         actionInverte_cinza->setText(QCoreApplication::translate("editorClass", "Inverter imagem cinza", nullptr));
         actionInverte_colorida->setText(QCoreApplication::translate("editorClass", "Inverter imagem colorida", nullptr));
         actionSalvar->setText(QCoreApplication::translate("editorClass", "Salvar", nullptr));
+        actionConverter_RGB_HSL->setText(QCoreApplication::translate("editorClass", "Converter RGB/HSL", nullptr));
         label_img1->setProperty("text", QVariant(QString()));
         pushButton->setText(QCoreApplication::translate("editorClass", "\360\237\241\204", nullptr));
         label_img2->setText(QString());
         menu_Arquivo->setTitle(QCoreApplication::translate("editorClass", "&Arquivo", nullptr));
         menu_Operacoes->setTitle(QCoreApplication::translate("editorClass", "&Opera\303\247\303\265es", nullptr));
         menuAjuda->setTitle(QCoreApplication::translate("editorClass", "Ajuda", nullptr));
+        menuOutros->setTitle(QCoreApplication::translate("editorClass", "Utilit\303\241rios", nullptr));
     } // retranslateUi
 
 };
