@@ -69,12 +69,13 @@ float conv_hsl::f(int n, float H, float S, float L) {
 
 void conv_hsl::HSLtoRGB(int h, int s, int l, int* r, int* g, int* b) {
 	// Imagem sem saturação alguma (ou seja, preta)
+	float ll = l / 240.0f;
 	if (s == 0) {
-		*r = *g = *b = std::round((l / 240.0f) * 255.0f);
+		*r = *g = *b = std::round(ll * 255.0f);
 		return;
 	}
 
-	float hh = (h / 2.0f) * 3.0f, ss = s / 240.0f, ll = l / 240.0f, rr = 0, gg = 0, bb = 0;
+	float hh = (h / 2.0f) * 3.0f, ss = s / 240.0f, rr = 0, gg = 0, bb = 0;
 
 	*r = f(0, hh, ss, ll);
 	*g = f(8, hh, ss, ll);

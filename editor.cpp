@@ -6,10 +6,14 @@
 
 #include<QDebug>
 
+#include <qwt_plot.h>
+#include <qwt_plot_curve.h>
+
 editor::editor(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
+
 
     // Define mensagem padrão da statusBar (onde são mostrados os pixels)
     sbMsg = new QLabel("<b>x:</b> 0, <b>y:</b> 0, <b>cor:</b> RGB(0, 0, 0)");

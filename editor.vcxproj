@@ -58,6 +58,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\Downloads\Qwt-6.1.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>F:\Downloads\Qwt-6.1.5\lib\x86\qwtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>

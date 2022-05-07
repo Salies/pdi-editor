@@ -9,12 +9,14 @@ divideRGB::divideRGB(const QImage &img, QWidget* parent) {
 	QImage aux = img;
 	if (img.isGrayscale())
 		aux = img.convertToFormat(QImage::Format_ARGB32);
+
 	// copia apenas para terem algum dado, e o mesmo tamanho
 	QImage red = aux.copy(), green = aux.copy(), blue = aux.copy();
 	// desassocia as cópias (previne mudanças na imagem original)
 	red.detach();
 	green.detach();
 	blue.detach();
+
 	uchar* redBits = red.bits(), * greenBits = green.bits(), * blueBits = blue.bits();
 	for (int i = 0; i < (img.width() * img.height() * 4); i += 4)
 	{
