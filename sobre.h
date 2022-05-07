@@ -8,6 +8,7 @@ class sobre : public QWidget {
 public:
 	sobre() {
 		ui.setupUi(this);
+		setAttribute(Qt::WA_DeleteOnClose, true);
 	}
 private:
 	Ui::Sobre ui;

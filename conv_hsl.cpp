@@ -13,13 +13,6 @@ conv_hsl::conv_hsl(QWidget* parent) {
 	mostraCor->setPalette(QPalette(QColor(0, 0, 0)));
 
 	ui.gridLayout->addWidget(mostraCor, 4, 0, 1, 4);
-
-	int r = 164, g = 235, b = 255, h = -1, s = -1, l = -1;
-	RGBtoHSL(r, g, b, &h, &s, &l);
-	qDebug() << h << s << l;
-	r = -1; g = -1; b = -1;
-	HSLtoRGB(h, s, l, &r, &g, &b);
-	qDebug() << r << g << b;
 }
 
 // Fórmula usada: https://www.rapidtables.com/convert/color/rgb-to-hsl.html
@@ -60,14 +53,16 @@ void conv_hsl::RGBtoHSL(int r, int g, int b, int* h, int* s, int* l) {
 }
 
 
+// HSL para RGB
+// Fórmula usada: https://en.wikipedia.org/wiki/HSL_and_HSV ("HSL to RGB alternative")
+// Ia tentar melhorar pro caso de teste RGB(164, 235, 255)
+// mas não precisa, o próprio Paint é impreciso neste caso
+// (dá o mesmo resultado pra 234 e 235)
 float conv_hsl::f(int n, float H, float S, float L) {
 	float k = std::fmod((n + (H / 30.0f)), 12.0f);
-	float a = S * std::min(L, 1.0f - L);
-	return std::round((L - a * std::max(-1.0f, std::min({ k - 3.0f, 9.0f - k, 1.0f })))*255.0f);
+	return std::round((L - (S * std::min(L, 1.0f - L)) * std::max(-1.0f, std::min({ k - 3.0f, 9.0f - k, 1.0f }))) * 255.0f);
 }
 
-// TODO: tentar melhorar pro caso de teste RGB(164, 235, 255)
-// Fórmula parcialmente usada: https://www.rapidtables.com/convert/color/hsl-to-rgb.html
 void conv_hsl::HSLtoRGB(int h, int s, int l, int* r, int* g, int* b) {
 	// Imagem sem saturação alguma (ou seja, preta)
 	if (s == 0) {
