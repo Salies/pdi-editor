@@ -5,6 +5,10 @@
 #include "histoEq.h"
 #include <QFileDialog>
 
+#include <qwt_plot.h>
+#include <qwt_plot_barchart.h>
+#include <qwt_plot_curve.h>
+
 #include <QDebug>
 
 editor::editor(QWidget *parent)

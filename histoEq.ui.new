@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>histoEq</class>
+ <widget class="QWidget" name="histoEq">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>280</width>
+    <height>274</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>280</width>
+    <height>274</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>280</width>
+    <height>274</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Equalizar histograma</string>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>180</y>
+     <width>261</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,0,10,5,10">
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Largura</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>de</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="fromWidth"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_3">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="text">
+       <string>até</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="toWidth"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>160</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Equalizar trecho</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>261</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="10,0,10,5,10">
+    <item>
+     <widget class="QLabel" name="label_5">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Altura</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>de</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="fromHeight"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_7">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="text">
+       <string>até</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="toHeight"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>240</y>
+     <width>260</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Equalizar</string>
+   </property>
+  </widget>
+  <widget class="QtCharts::QChartView" name="chartview">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>260</width>
+     <height>150</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QtCharts::QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">QtCharts/QChartView&gt;
+#include &lt;QtCharts/chartsnamespace.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

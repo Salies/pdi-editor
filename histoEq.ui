@@ -34,6 +34,25 @@
   <property name="windowTitle">
    <string>Equalizar histograma</string>
   </property>
+  <widget class="QwtPlot" name="histoPlot">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>240</width>
+     <height>130</height>
+    </rect>
+   </property>
+   <property name="canvasBackground">
+    <brush brushstyle="SolidPattern">
+     <color alpha="255">
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
+     </color>
+    </brush>
+   </property>
+  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -170,6 +189,13 @@
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

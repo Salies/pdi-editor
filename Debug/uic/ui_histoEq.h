@@ -16,12 +16,14 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QWidget>
+#include "qwt_plot.h"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_histoEq
 {
 public:
+    QwtPlot *histoPlot;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *label_2;
@@ -52,6 +54,12 @@ public:
         histoEq->setSizePolicy(sizePolicy);
         histoEq->setMinimumSize(QSize(280, 274));
         histoEq->setMaximumSize(QSize(280, 274));
+        histoPlot = new QwtPlot(histoEq);
+        histoPlot->setObjectName(QString::fromUtf8("histoPlot"));
+        histoPlot->setGeometry(QRect(20, 20, 240, 130));
+        QBrush brush(QColor(255, 255, 255, 255));
+        brush.setStyle(Qt::SolidPattern);
+        histoPlot->setCanvasBackground(brush);
         horizontalLayoutWidget = new QWidget(histoEq);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
         horizontalLayoutWidget->setGeometry(QRect(10, 180, 261, 22));
