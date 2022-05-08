@@ -4,32 +4,21 @@ histoEq::histoEq(const QImage& img, QImage *imgSaida, QLabel* labelSaida, QWidge
 	setAttribute(Qt::WA_DeleteOnClose, true);
 	ui.setupUi(this);
 	connect(ui.pushButton, &QPushButton::clicked, this, &histoEq::eq);
-	int w = img.width(), h = img.height();
-	ui.fromWidth->setMaximum(w);
-	ui.toWidth->setMaximum(w);
-	ui.fromHeight->setMaximum(h);
-	ui.toHeight->setMaximum(h);
-	ui.toWidth->setValue(w);
-	ui.toHeight->setValue(h);
-
-	// Histograma
-	const uchar* bits = img.constBits();
-	// Formato double é necessário para plotar
-	double histograma[256] = { 0 };
-	for (int i = 0; i < (w * h); i++)
-		histograma[bits[i]]++;
-
-	// Para plotar, é necessária a conversão: double[] -> QVector
-	vec.reserve(256);
-	std::copy(histograma, histograma + 256, std::back_inserter(vec));
-
 	barra = new QwtPlotBarChart;
-	barra->setSamples(vec);
 	barra->setSpacing(0);
 	barra->attach(ui.histoPlot);
 	ui.histoPlot->setAxisScale(ui.histoPlot->xBottom, 0, 255, 51);
 	ui.histoPlot->setAxisScale(ui.histoPlot->xTop, 0, 255, 51);
-	
+	h.reserve(256);
+	h.resize(256);
+	std::fill(h.begin(), h.end(), 0);
+
+	// Histograma
+	const uchar* bits = img.constBits();
+	for (int i = 0; i < (img.width() * img.height()); i++)
+		h[bits[i]]++;
+	plot();
+
 	// Preparando para uma possível equalização
 	*imgSaida = img.copy();
 	img_eq = imgSaida;
@@ -37,24 +26,27 @@ histoEq::histoEq(const QImage& img, QImage *imgSaida, QLabel* labelSaida, QWidge
 }
 
 void histoEq::eq() {
-	int fromWidth = ui.fromWidth->value(), toWidth = ui.toWidth->value(),
-		fromHeight = ui.fromHeight->value(), toHeight = ui.toHeight->value(),
-		freq_acc = 0, i;
+	int freq_acc = 0, size = img_eq->width() * img_eq->height(), i;
 	uchar* lut = new uchar[256]; // lookup table para economizar processamento
-	float escala = 255.0f / ((toWidth - fromWidth) * (toHeight - fromHeight));
+	float escala = 255.0f / size;
 
 	for (i = 0; i < 256; i++) {
-		freq_acc += vec[i];
+		freq_acc += h[i];
 		lut[i] = (uchar)(freq_acc * escala);
 	}
 
 	uchar* bits = img_eq->bits();
-	for (i = 0; i < (toWidth * toHeight); i++) {
+	std::fill(h.begin(), h.end(), 0);
+	for (i = 0; i < size; i++) {
 		bits[i] = lut[bits[i]];
+		h[bits[i]]++;
 	}
-
-
-
+	plot();
 
 	label_eq->setPixmap(QPixmap::fromImage(*img_eq));
+}
+
+void histoEq::plot() {
+	barra->setSamples(QVector<double>::fromStdVector(h));
+	ui.histoPlot->replot();
 }

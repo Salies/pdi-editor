@@ -1,6 +1,7 @@
 #pragma once
 #include <QWidget>
 #include <QImage>
+#include <QLabel>
 #include <ui_histoEq.h>
 #include <qwt_plot_barchart.h>
 
@@ -13,7 +14,8 @@ public:
 private:
     Ui::histoEq ui;
     void eq();
-    QVector<double> vec;
+    void plot();
+    std::vector<double> h; // formato double é necessário para plotar
     QImage *img_eq;
     QLabel* label_eq;
     QwtPlotBarChart* barra;
