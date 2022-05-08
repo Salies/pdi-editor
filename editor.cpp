@@ -116,7 +116,7 @@ void editor::dividirRGB() {
 void editor::equalizarHistograma() {
     if (!img.isGrayscale()) return;
 
-    histoEq* eq = new histoEq(&img);
+    histoEq* eq = new histoEq(img, &imgB, ui.label_img2);
     eq->show();
 }
 

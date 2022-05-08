@@ -84,7 +84,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="spinBox"/>
+     <widget class="QSpinBox" name="fromWidth"/>
     </item>
     <item>
      <widget class="QLabel" name="label_3">
@@ -100,7 +100,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="spinBox_2"/>
+     <widget class="QSpinBox" name="toWidth"/>
     </item>
    </layout>
   </widget>
@@ -155,7 +155,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="spinBox_3"/>
+     <widget class="QSpinBox" name="fromHeight"/>
     </item>
     <item>
      <widget class="QLabel" name="label_7">
@@ -171,7 +171,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="spinBox_4"/>
+     <widget class="QSpinBox" name="toHeight"/>
     </item>
    </layout>
   </widget>

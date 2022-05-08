@@ -28,17 +28,17 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *label_2;
     QLabel *label_4;
-    QSpinBox *spinBox;
+    QSpinBox *fromWidth;
     QLabel *label_3;
-    QSpinBox *spinBox_2;
+    QSpinBox *toWidth;
     QLabel *label;
     QWidget *horizontalLayoutWidget_2;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_5;
     QLabel *label_6;
-    QSpinBox *spinBox_3;
+    QSpinBox *fromHeight;
     QLabel *label_7;
-    QSpinBox *spinBox_4;
+    QSpinBox *toHeight;
     QPushButton *pushButton;
 
     void setupUi(QWidget *histoEq)
@@ -80,10 +80,10 @@ public:
 
         horizontalLayout->addWidget(label_4);
 
-        spinBox = new QSpinBox(horizontalLayoutWidget);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
+        fromWidth = new QSpinBox(horizontalLayoutWidget);
+        fromWidth->setObjectName(QString::fromUtf8("fromWidth"));
 
-        horizontalLayout->addWidget(spinBox);
+        horizontalLayout->addWidget(fromWidth);
 
         label_3 = new QLabel(horizontalLayoutWidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -92,10 +92,10 @@ public:
 
         horizontalLayout->addWidget(label_3);
 
-        spinBox_2 = new QSpinBox(horizontalLayoutWidget);
-        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
+        toWidth = new QSpinBox(horizontalLayoutWidget);
+        toWidth->setObjectName(QString::fromUtf8("toWidth"));
 
-        horizontalLayout->addWidget(spinBox_2);
+        horizontalLayout->addWidget(toWidth);
 
         horizontalLayout->setStretch(0, 10);
         horizontalLayout->setStretch(2, 10);
@@ -126,10 +126,10 @@ public:
 
         horizontalLayout_2->addWidget(label_6);
 
-        spinBox_3 = new QSpinBox(horizontalLayoutWidget_2);
-        spinBox_3->setObjectName(QString::fromUtf8("spinBox_3"));
+        fromHeight = new QSpinBox(horizontalLayoutWidget_2);
+        fromHeight->setObjectName(QString::fromUtf8("fromHeight"));
 
-        horizontalLayout_2->addWidget(spinBox_3);
+        horizontalLayout_2->addWidget(fromHeight);
 
         label_7 = new QLabel(horizontalLayoutWidget_2);
         label_7->setObjectName(QString::fromUtf8("label_7"));
@@ -138,10 +138,10 @@ public:
 
         horizontalLayout_2->addWidget(label_7);
 
-        spinBox_4 = new QSpinBox(horizontalLayoutWidget_2);
-        spinBox_4->setObjectName(QString::fromUtf8("spinBox_4"));
+        toHeight = new QSpinBox(horizontalLayoutWidget_2);
+        toHeight->setObjectName(QString::fromUtf8("toHeight"));
 
-        horizontalLayout_2->addWidget(spinBox_4);
+        horizontalLayout_2->addWidget(toHeight);
 
         horizontalLayout_2->setStretch(0, 10);
         horizontalLayout_2->setStretch(2, 10);
