@@ -138,6 +138,7 @@
      <string>&amp;Operações</string>
     </property>
     <addaction name="actionInverte_cinza"/>
+    <addaction name="actionEqualizarHistograma"/>
     <addaction name="separator"/>
     <addaction name="action_paraCinza"/>
     <addaction name="actionInverte_colorida"/>
@@ -212,6 +213,11 @@
   <action name="actionSair">
    <property name="text">
     <string>Sair</string>
+   </property>
+  </action>
+  <action name="actionEqualizarHistograma">
+   <property name="text">
+    <string>Equalizar histograma</string>
    </property>
   </action>
  </widget>

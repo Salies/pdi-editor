@@ -26,6 +26,7 @@ private slots:
     void dividirRGB();
     void inverteCinza();
     void inverteColorido();
+    void equalizarHistograma();
     // Ajuda
     void janelaSobre();
     // Outros

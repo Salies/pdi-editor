@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'editor.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.1
+** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -38,6 +38,7 @@ public:
     QAction *actionSalvar;
     QAction *actionConverter_RGB_HSL;
     QAction *actionSair;
+    QAction *actionEqualizarHistograma;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QScrollArea *scroll_img1;
@@ -77,6 +78,8 @@ public:
         actionConverter_RGB_HSL->setObjectName(QString::fromUtf8("actionConverter_RGB_HSL"));
         actionSair = new QAction(editorClass);
         actionSair->setObjectName(QString::fromUtf8("actionSair"));
+        actionEqualizarHistograma = new QAction(editorClass);
+        actionEqualizarHistograma->setObjectName(QString::fromUtf8("actionEqualizarHistograma"));
         centralWidget = new QWidget(editorClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -152,6 +155,7 @@ public:
         menu_Arquivo->addSeparator();
         menu_Arquivo->addAction(actionSair);
         menu_Operacoes->addAction(actionInverte_cinza);
+        menu_Operacoes->addAction(actionEqualizarHistograma);
         menu_Operacoes->addSeparator();
         menu_Operacoes->addAction(action_paraCinza);
         menu_Operacoes->addAction(actionInverte_colorida);
@@ -180,6 +184,7 @@ public:
         actionSalvar->setText(QCoreApplication::translate("editorClass", "Salvar", nullptr));
         actionConverter_RGB_HSL->setText(QCoreApplication::translate("editorClass", "Converter RGB/HSL", nullptr));
         actionSair->setText(QCoreApplication::translate("editorClass", "Sair", nullptr));
+        actionEqualizarHistograma->setText(QCoreApplication::translate("editorClass", "Equalizar histograma", nullptr));
         label_img1->setProperty("text", QVariant(QString()));
         pushButton->setText(QCoreApplication::translate("editorClass", "\360\237\241\204", nullptr));
         label_img2->setText(QString());

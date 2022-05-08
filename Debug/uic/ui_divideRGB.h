@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'divideRGB.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.1
+** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -31,6 +31,7 @@ public:
     {
         if (dividergb_class->objectName().isEmpty())
             dividergb_class->setObjectName(QString::fromUtf8("dividergb_class"));
+        dividergb_class->setWindowModality(Qt::ApplicationModal);
         dividergb_class->resize(1616, 554);
         scrollArea = new QScrollArea(dividergb_class);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));

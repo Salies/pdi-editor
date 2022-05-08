@@ -3,7 +3,6 @@
 
 divideRGB::divideRGB(const QImage &img, QWidget* parent) {
 	ui.setupUi(this);
-	setWindowModality(Qt::ApplicationModal);
 	setAttribute(Qt::WA_DeleteOnClose, true);
 
 	QImage aux = img;

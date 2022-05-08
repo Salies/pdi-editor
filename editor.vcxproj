@@ -31,7 +31,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="QtSettings">
-    <QtInstall>5.15.1_msvc2019</QtInstall>
+    <QtInstall>5.15.2_msvc2019</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -94,6 +94,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="conv_hsl.cpp" />
+    <ClCompile Include="histoEq.cpp" />
     <ClCompile Include="mainlabel.cpp" />
     <QtRcc Include="editor.qrc" />
     <QtUic Include="conv_hsl.ui" />
@@ -103,6 +104,7 @@
     <ClCompile Include="divideRGB.cpp" />
     <ClCompile Include="editor.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="histoEq.ui" />
     <QtUic Include="sobre.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="conv_hsl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="histoEq.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

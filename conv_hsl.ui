@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>conv_hsl_class</class>
  <widget class="QWidget" name="conv_hsl_class">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>

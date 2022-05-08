@@ -11,8 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -21,11 +21,12 @@ class Ui_Sobre
 public:
     QLabel *label;
 
-    void setupUi(QWidget *Sobre)
+    void setupUi(QDialog *Sobre)
     {
         if (Sobre->objectName().isEmpty())
             Sobre->setObjectName(QString::fromUtf8("Sobre"));
         Sobre->resize(412, 103);
+        Sobre->setModal(true);
         label = new QLabel(Sobre);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(20, 10, 361, 81));
@@ -37,7 +38,7 @@ public:
         QMetaObject::connectSlotsByName(Sobre);
     } // setupUi
 
-    void retranslateUi(QWidget *Sobre)
+    void retranslateUi(QDialog *Sobre)
     {
         Sobre->setWindowTitle(QCoreApplication::translate("Sobre", "Form", nullptr));
         label->setText(QCoreApplication::translate("Sobre", "2022 - Daniel Serezane.\n"

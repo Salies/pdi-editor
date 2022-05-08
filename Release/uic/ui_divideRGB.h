@@ -11,65 +11,70 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Form
+class Ui_dividergb_class
 {
 public:
     QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
+    QLabel *imgL1;
     QScrollArea *scrollArea_2;
-    QWidget *scrollAreaWidgetContents_2;
+    QLabel *imgL2;
     QScrollArea *scrollArea_3;
-    QWidget *scrollAreaWidgetContents_3;
+    QLabel *imgL3;
 
-    void setupUi(QWidget *Form)
+    void setupUi(QWidget *dividergb_class)
     {
-        if (Form->objectName().isEmpty())
-            Form->setObjectName(QString::fromUtf8("Form"));
-        Form->resize(1610, 552);
-        scrollArea = new QScrollArea(Form);
+        if (dividergb_class->objectName().isEmpty())
+            dividergb_class->setObjectName(QString::fromUtf8("dividergb_class"));
+        dividergb_class->setWindowModality(Qt::ApplicationModal);
+        dividergb_class->resize(1616, 554);
+        scrollArea = new QScrollArea(dividergb_class);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setGeometry(QRect(20, 20, 512, 512));
+        scrollArea->setGeometry(QRect(20, 20, 514, 514));
         scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 510, 510));
-        scrollArea->setWidget(scrollAreaWidgetContents);
-        scrollArea_2 = new QScrollArea(Form);
+        imgL1 = new QLabel();
+        imgL1->setObjectName(QString::fromUtf8("imgL1"));
+        imgL1->setGeometry(QRect(0, 0, 512, 512));
+        scrollArea->setWidget(imgL1);
+        scrollArea_2 = new QScrollArea(dividergb_class);
         scrollArea_2->setObjectName(QString::fromUtf8("scrollArea_2"));
-        scrollArea_2->setGeometry(QRect(550, 20, 512, 512));
+        scrollArea_2->setGeometry(QRect(552, 20, 514, 514));
         scrollArea_2->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 510, 510));
-        scrollArea_2->setWidget(scrollAreaWidgetContents_2);
-        scrollArea_3 = new QScrollArea(Form);
+        imgL2 = new QLabel();
+        imgL2->setObjectName(QString::fromUtf8("imgL2"));
+        imgL2->setGeometry(QRect(0, 0, 512, 512));
+        scrollArea_2->setWidget(imgL2);
+        scrollArea_3 = new QScrollArea(dividergb_class);
         scrollArea_3->setObjectName(QString::fromUtf8("scrollArea_3"));
-        scrollArea_3->setGeometry(QRect(1080, 20, 512, 512));
+        scrollArea_3->setGeometry(QRect(1082, 20, 514, 514));
         scrollArea_3->setWidgetResizable(true);
-        scrollAreaWidgetContents_3 = new QWidget();
-        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 510, 510));
-        scrollArea_3->setWidget(scrollAreaWidgetContents_3);
+        imgL3 = new QLabel();
+        imgL3->setObjectName(QString::fromUtf8("imgL3"));
+        imgL3->setGeometry(QRect(0, 0, 512, 512));
+        scrollArea_3->setWidget(imgL3);
 
-        retranslateUi(Form);
+        retranslateUi(dividergb_class);
 
-        QMetaObject::connectSlotsByName(Form);
+        QMetaObject::connectSlotsByName(dividergb_class);
     } // setupUi
 
-    void retranslateUi(QWidget *Form)
+    void retranslateUi(QWidget *dividergb_class)
     {
-        Form->setWindowTitle(QCoreApplication::translate("Form", "Form", nullptr));
+        dividergb_class->setWindowTitle(QCoreApplication::translate("dividergb_class", "Divis\303\243o em RGB", nullptr));
+        imgL1->setText(QString());
+        imgL2->setText(QString());
+        imgL3->setText(QString());
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Form: public Ui_Form {};
+    class dividergb_class: public Ui_dividergb_class {};
 } // namespace Ui
 
 QT_END_NAMESPACE

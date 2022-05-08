@@ -5,7 +5,6 @@
 
 conv_hsl::conv_hsl(QWidget* parent) {
 	ui.setupUi(this);
-	setWindowModality(Qt::ApplicationModal);
 	setAttribute(Qt::WA_DeleteOnClose, true);
 
 	mostraCor = new QWidget();

@@ -2,12 +2,10 @@
 #include "sobre.h"
 #include "divideRGB.h"
 #include "conv_hsl.h"
+#include "histoEq.h"
 #include <QFileDialog>
 
-#include<QDebug>
-
-#include <qwt_plot.h>
-#include <qwt_plot_curve.h>
+#include <QDebug>
 
 editor::editor(QWidget *parent)
     : QMainWindow(parent)
@@ -36,6 +34,7 @@ editor::editor(QWidget *parent)
     connect(ui.actionSalvar, &QAction::triggered, this, &editor::salvar);
     connect(ui.label_img1, &MainLabel::novaPos, this, &editor::atualizarPos);
     connect(ui.actionConverter_RGB_HSL, &QAction::triggered, this, &editor::converterRGB_HSL);
+    connect(ui.actionEqualizarHistograma, &QAction::triggered, this, &editor::equalizarHistograma);
 }
 
 // Arquivo
@@ -108,6 +107,13 @@ void editor::inverteColorido() {
 void editor::dividirRGB() {
     divideRGB* d = new divideRGB(img);
     d->show();
+}
+
+void editor::equalizarHistograma() {
+    if (!img.isGrayscale()) return;
+
+    histoEq* eq = new histoEq(&img);
+    eq->show();
 }
 
 // Ajuda

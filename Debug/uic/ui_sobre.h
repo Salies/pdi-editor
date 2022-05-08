@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sobre.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.1
+** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -26,6 +26,7 @@ public:
         if (Sobre->objectName().isEmpty())
             Sobre->setObjectName(QString::fromUtf8("Sobre"));
         Sobre->resize(412, 103);
+        Sobre->setModal(true);
         label = new QLabel(Sobre);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(20, 10, 361, 81));

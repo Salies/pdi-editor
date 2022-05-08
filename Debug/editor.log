@@ -1,3 +1,21 @@
-﻿  Reading Qt configuration (D:/Qt/5.15.1/msvc2019/bin/qmake)
+﻿  Reading Qt configuration (D:/Qt/5.15.2/msvc2019/bin/qmake)
+  moc editor.h
+  moc sobre.h
+  moc divideRGB.h
+  moc mainlabel.h
+  moc conv_hsl.h
+  moc histoEq.h
+  conv_hsl.cpp
+  histoEq.cpp
+  mainlabel.cpp
+  divideRGB.cpp
   editor.cpp
+  main.cpp
+  qrc_editor.cpp
+  moc_editor.cpp
+  moc_sobre.cpp
+  moc_divideRGB.cpp
+  moc_mainlabel.cpp
+  moc_conv_hsl.cpp
+  moc_histoEq.cpp
   editor.vcxproj -> D:\Documentos\Unesp\PDI\pdi-editor\Debug\editor.exe
