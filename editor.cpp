@@ -127,14 +127,15 @@ void editor::addSaltPepper() {
 
     imgB = img.copy();
     int size = img.width() * img.height();
+    int cores[2] = { 0, 255 };
     uchar* bits = imgB.bits();
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, size);
-    std::uniform_int_distribution<> distCor(0, 255);
+    std::uniform_int_distribution<> distCor(0, 1);
 
     for (int i = 0; i < size / 10; i++)
-        bits[dist(gen)] = distCor(gen);
+        bits[dist(gen)] = cores[distCor(gen)];
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
