@@ -16,23 +16,12 @@ divideRGB::divideRGB(const QImage &img, QWidget* parent) {
 	green.detach();
 	blue.detach();
 
-	uchar* redBits = red.bits(), * greenBits = green.bits(), * blueBits = blue.bits();
-	for (int i = 0; i < (img.width() * img.height() * 4); i += 4)
+	QRgb* redBits = (QRgb*)(red.bits()), * greenBits = (QRgb*)(green.bits()), * blueBits = (QRgb*)(blue.bits());
+	for (int i = 0; i < (img.width() * img.height()); i ++)
 	{
-		// bits[i] = azul
-		// bits[i + 1] = verde
-		// bits [i + 2] = vermelho
-		// imagem azul
-		blueBits[i + 1] = 0;
-		blueBits[i + 2] = 0;
-
-		// imagem verde
-		greenBits[i] = 0;
-		greenBits[i + 2] = 0;
-
-		// imagem vermelha
-		redBits[i] = 0;
-		redBits[i + 1] = 0;
+		redBits[i] &= 0xffff0000;
+		greenBits[i] &= 0xff00ff00;
+		blueBits[i] &= 0xff0000ff;
 	}
 	
 	// Imprimindo (colocando nos pixmaps/labels)

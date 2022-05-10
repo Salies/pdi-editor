@@ -64,18 +64,21 @@ void editor::sair() {
 }
 
 // Operações
+// Nesta função: por que castar para QRgb? Pois a ordem de RGB
+// muda de acordo com a ordem de bytes da máquina. Logo, é melhor
+// deixar o Qt responsável por determiná-la. Isso (casting) não é
+// necessário nas funções p/ imagens em escala de cinza, visto que
+// guardam apenas uma cor por byte, ou seja, independem de ordem
+// (o vetor é sempre a imagem linearizada).
 void editor::converteParaCinza() {
     if (img.isGrayscale()) return;
 
     imgB = img.copy();
-    uchar* bits = imgB.bits();
-    int cinza;
-    for (int i = 0; i < (imgB.width() * imgB.height() * 4); i+=4)
-    {
-        cinza = (bits[i] + bits[i + 1] + bits[i + 2]) / 3;
-        bits[i] = cinza;
-        bits[i + 1] = cinza;
-        bits[i + 2] = cinza;
+    uchar cinza;
+    QRgb* data = (QRgb*)(imgB.bits());
+    for (int i = 0; i < (imgB.width() * imgB.height()); i++) {
+        cinza = (qRed(data[i]) + qGreen(data[i]) + qBlue(data[i])) / 3;
+        data[i] = qRgb(cinza, cinza, cinza);
     }
 
     imgB = imgB.convertToFormat(QImage::Format_Grayscale8);
@@ -97,13 +100,9 @@ void editor::inverteColorido() {
     if (img.isGrayscale()) return;
 
     imgB = img.copy();
-    uchar* bits = imgB.bits();
-    for (int i = 0; i < (imgB.width() * imgB.height() * 4); i += 4)
-    {
-        bits[i] = 255 - bits[i];
-        bits[i + 1] = 255 - bits[i + 1];
-        bits[i + 2] = 255 - bits[i + 2];
-    }
+    QRgb* data = (QRgb*)(imgB.bits());
+    for (int i = 0; i < (imgB.width() * imgB.height()); i ++)
+        data[i] = qRgb(255 - qRed(data[i]), 255 - qGreen(data[i]), 255 - qBlue(data[i]));
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
@@ -136,6 +135,8 @@ void editor::copiaParaEsquerda() {
 void editor::atualizarPos(int x, int y) {
     if (!img.valid(x, y)) return;
 
+    // Como o acesso aqui é pontual, acessamos pelo método pixelColor(),
+    // ineficiente em manipulações de muitos pixels (como as implementadas aqui).
     QColor cor = img.pixelColor(x, y);
     corAtual->setPalette(cor);
     sbMsg->setText("<b>x:</b> " + QString::number(x) + ", <b>y:</b> " + QString::number(y) +
@@ -152,3 +153,4 @@ void editor::converterRGB_HSL() {
 
 // TODO FAZER BASE DE JANELA COM MODALIDADE E LIMPEZA DE MEMÓRIA
 // ^^ HERANÇA MÚLTIPLA (PRA NÃO ZOAR O DESIGNER)?
+// modalidade não precisa, já tem no designer
