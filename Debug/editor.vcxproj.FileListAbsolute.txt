@@ -1,3 +1,0 @@
-C:\Users\Daniel Serezane\Documents\Unesp\PDI\editor\Debug\editor.exe
-C:\Users\Daniel\Documents\Unesp\PDI\editor\Debug\editor.exe
-D:\Documentos\Unesp\PDI\pdi-editor\Debug\editor.exe
