@@ -139,6 +139,7 @@
     </property>
     <addaction name="actionInverte_cinza"/>
     <addaction name="actionEqualizarHistograma"/>
+    <addaction name="actionAddSaltPepper"/>
     <addaction name="separator"/>
     <addaction name="action_paraCinza"/>
     <addaction name="actionInverte_colorida"/>
@@ -218,6 +219,11 @@
   <action name="actionEqualizarHistograma">
    <property name="text">
     <string>Equalizar histograma</string>
+   </property>
+  </action>
+  <action name="actionAddSaltPepper">
+   <property name="text">
+    <string>Adicionar ruído sal e pimenta (10%)</string>
    </property>
   </action>
  </widget>

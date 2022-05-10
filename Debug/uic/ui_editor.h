@@ -39,6 +39,7 @@ public:
     QAction *actionConverter_RGB_HSL;
     QAction *actionSair;
     QAction *actionEqualizarHistograma;
+    QAction *actionAddSaltPepper;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QScrollArea *scroll_img1;
@@ -80,6 +81,8 @@ public:
         actionSair->setObjectName(QString::fromUtf8("actionSair"));
         actionEqualizarHistograma = new QAction(editorClass);
         actionEqualizarHistograma->setObjectName(QString::fromUtf8("actionEqualizarHistograma"));
+        actionAddSaltPepper = new QAction(editorClass);
+        actionAddSaltPepper->setObjectName(QString::fromUtf8("actionAddSaltPepper"));
         centralWidget = new QWidget(editorClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -156,6 +159,7 @@ public:
         menu_Arquivo->addAction(actionSair);
         menu_Operacoes->addAction(actionInverte_cinza);
         menu_Operacoes->addAction(actionEqualizarHistograma);
+        menu_Operacoes->addAction(actionAddSaltPepper);
         menu_Operacoes->addSeparator();
         menu_Operacoes->addAction(action_paraCinza);
         menu_Operacoes->addAction(actionInverte_colorida);
@@ -185,6 +189,7 @@ public:
         actionConverter_RGB_HSL->setText(QCoreApplication::translate("editorClass", "Converter RGB/HSL", nullptr));
         actionSair->setText(QCoreApplication::translate("editorClass", "Sair", nullptr));
         actionEqualizarHistograma->setText(QCoreApplication::translate("editorClass", "Equalizar histograma", nullptr));
+        actionAddSaltPepper->setText(QCoreApplication::translate("editorClass", "Adicionar ru\303\255do sal e pimenta (10%)", nullptr));
         label_img1->setProperty("text", QVariant(QString()));
         pushButton->setText(QCoreApplication::translate("editorClass", "\360\237\241\204", nullptr));
         label_img2->setText(QString());

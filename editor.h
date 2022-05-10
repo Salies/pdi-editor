@@ -27,6 +27,7 @@ private slots:
     void inverteCinza();
     void inverteColorido();
     void equalizarHistograma();
+    void addSaltPepper();
     // Ajuda
     void janelaSobre();
     // Outros

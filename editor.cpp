@@ -3,6 +3,7 @@
 #include "divideRGB.h"
 #include "conv_hsl.h"
 #include "histoEq.h"
+#include <random>
 #include <QFileDialog>
 
 #include <qwt_plot.h>
@@ -39,6 +40,7 @@ editor::editor(QWidget *parent)
     connect(ui.label_img1, &MainLabel::novaPos, this, &editor::atualizarPos);
     connect(ui.actionConverter_RGB_HSL, &QAction::triggered, this, &editor::converterRGB_HSL);
     connect(ui.actionEqualizarHistograma, &QAction::triggered, this, &editor::equalizarHistograma);
+    connect(ui.actionAddSaltPepper, &QAction::triggered, this, &editor::addSaltPepper);
 }
 
 // Arquivo
@@ -64,6 +66,7 @@ void editor::sair() {
 }
 
 // Operações
+
 // Nesta função: por que castar para QRgb? Pois a ordem de RGB
 // muda de acordo com a ordem de bytes da máquina. Logo, é melhor
 // deixar o Qt responsável por determiná-la. Isso (casting) não é
@@ -117,6 +120,23 @@ void editor::equalizarHistograma() {
 
     histoEq* eq = new histoEq(img, &imgB, ui.label_img2);
     eq->show();
+}
+
+void editor::addSaltPepper() {
+    if (!img.isGrayscale()) return;
+
+    imgB = img.copy();
+    int size = img.width() * img.height();
+    uchar* bits = imgB.bits();
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(0, size);
+    std::uniform_int_distribution<> distCor(0, 255);
+
+    for (int i = 0; i < size / 10; i++)
+        bits[dist(gen)] = distCor(gen);
+
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 // Ajuda
