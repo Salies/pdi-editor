@@ -41,6 +41,7 @@ editor::editor(QWidget *parent)
     connect(ui.actionConverter_RGB_HSL, &QAction::triggered, this, &editor::converterRGB_HSL);
     connect(ui.actionEqualizarHistograma, &QAction::triggered, this, &editor::equalizarHistograma);
     connect(ui.actionAddSaltPepper, &QAction::triggered, this, &editor::addSaltPepper);
+    connect(ui.actionConv, &QAction::triggered, this, &editor::conv);
 }
 
 // Arquivo
@@ -138,6 +139,11 @@ void editor::addSaltPepper() {
         bits[dist(gen)] = cores[distCor(gen)];
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+}
+
+// Considerando uma matriz d 
+void editor::conv(int* matriz, int m, int n) {
+    int centroX = m / 2, centroY = n / 2;
 }
 
 // Ajuda

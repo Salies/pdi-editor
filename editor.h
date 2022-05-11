@@ -28,6 +28,7 @@ private slots:
     void inverteColorido();
     void equalizarHistograma();
     void addSaltPepper();
+    void conv(int* matriz, int m, int n);
     // Ajuda
     void janelaSobre();
     // Outros
