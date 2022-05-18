@@ -28,6 +28,10 @@ private slots:
     void inverteColorido();
     void equalizarHistograma();
     void addSaltPepper();
+    void media3x3();
+    void mediana3x3();
+    void mediana(int mWidth, int mHeight);
+    void convolucao(float* matriz, int mWidth, int mHeight);
     // Ajuda
     void janelaSobre();
     // Outros

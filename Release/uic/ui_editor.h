@@ -40,6 +40,8 @@ public:
     QAction *actionSair;
     QAction *actionEqualizarHistograma;
     QAction *actionAddSaltPepper;
+    QAction *actionMedia3x3;
+    QAction *actionMediana3x3;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QScrollArea *scroll_img1;
@@ -83,6 +85,10 @@ public:
         actionEqualizarHistograma->setObjectName(QString::fromUtf8("actionEqualizarHistograma"));
         actionAddSaltPepper = new QAction(editorClass);
         actionAddSaltPepper->setObjectName(QString::fromUtf8("actionAddSaltPepper"));
+        actionMedia3x3 = new QAction(editorClass);
+        actionMedia3x3->setObjectName(QString::fromUtf8("actionMedia3x3"));
+        actionMediana3x3 = new QAction(editorClass);
+        actionMediana3x3->setObjectName(QString::fromUtf8("actionMediana3x3"));
         centralWidget = new QWidget(editorClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -127,7 +133,7 @@ public:
         label_img2 = new QLabel();
         label_img2->setObjectName(QString::fromUtf8("label_img2"));
         label_img2->setGeometry(QRect(0, 0, 512, 512));
-        label_img2->setScaledContents(true);
+        label_img2->setScaledContents(false);
         scroll_img2->setWidget(label_img2);
 
         horizontalLayout->addWidget(scroll_img2);
@@ -160,6 +166,8 @@ public:
         menu_Operacoes->addAction(actionInverte_cinza);
         menu_Operacoes->addAction(actionEqualizarHistograma);
         menu_Operacoes->addAction(actionAddSaltPepper);
+        menu_Operacoes->addAction(actionMedia3x3);
+        menu_Operacoes->addAction(actionMediana3x3);
         menu_Operacoes->addSeparator();
         menu_Operacoes->addAction(action_paraCinza);
         menu_Operacoes->addAction(actionInverte_colorida);
@@ -190,6 +198,8 @@ public:
         actionSair->setText(QCoreApplication::translate("editorClass", "Sair", nullptr));
         actionEqualizarHistograma->setText(QCoreApplication::translate("editorClass", "Equalizar histograma", nullptr));
         actionAddSaltPepper->setText(QCoreApplication::translate("editorClass", "Adicionar ru\303\255do sal e pimenta (10%)", nullptr));
+        actionMedia3x3->setText(QCoreApplication::translate("editorClass", "M\303\251dia 3x3", nullptr));
+        actionMediana3x3->setText(QCoreApplication::translate("editorClass", "Mediana 3x3", nullptr));
         label_img1->setProperty("text", QVariant(QString()));
         pushButton->setText(QCoreApplication::translate("editorClass", "\360\237\241\204", nullptr));
         label_img2->setText(QString());
