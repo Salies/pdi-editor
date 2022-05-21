@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>D:\Documentos\Unesp\PDI\pdi-editor\Debug\editor.exe</FullPath>
+=======
+      <FullPath>C:\Users\Daniel\Documents\Unesp\PDI\pdi-editor\Debug\editor.exe</FullPath>
+>>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

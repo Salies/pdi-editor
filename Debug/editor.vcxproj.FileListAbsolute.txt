@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 D:\Documentos\Unesp\PDI\pdi-editor\Debug\editor.exe
+=======
+C:\Users\Daniel\Documents\Unesp\PDI\pdi-editor\Debug\editor.exe
+>>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd

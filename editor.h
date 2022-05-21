@@ -28,12 +28,16 @@ private slots:
     void inverteColorido();
     void equalizarHistograma();
     void addSaltPepper();
+<<<<<<< HEAD
     void media3x3();
     void mediana3x3();
     void mediana(int mWidth, int mHeight);
     void convolucao(float* matriz, int mWidth, int mHeight, int div = 1);
     void binariza();
     void laplaciano4x4();
+=======
+    void conv(int* matriz, int m, int n);
+>>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
     // Ajuda
     void janelaSobre();
     // Outros

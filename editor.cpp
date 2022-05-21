@@ -42,10 +42,14 @@ editor::editor(QWidget *parent)
     connect(ui.actionConverter_RGB_HSL, &QAction::triggered, this, &editor::converterRGB_HSL);
     connect(ui.actionEqualizarHistograma, &QAction::triggered, this, &editor::equalizarHistograma);
     connect(ui.actionAddSaltPepper, &QAction::triggered, this, &editor::addSaltPepper);
+<<<<<<< HEAD
     connect(ui.actionMedia3x3, &QAction::triggered, this, &editor::media3x3);
     connect(ui.actionMediana3x3, &QAction::triggered, this, &editor::mediana3x3);
     connect(ui.actionBinariza, &QAction::triggered, this, &editor::binariza);
     connect(ui.actionLaplaciano4x4, &QAction::triggered, this, &editor::laplaciano4x4);
+=======
+    connect(ui.actionConv, &QAction::triggered, this, &editor::conv);
+>>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
 }
 
 // Arquivo
@@ -154,6 +158,7 @@ void editor::addSaltPepper() {
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
+<<<<<<< HEAD
 void editor::media3x3() {
     float cte = 1.0f / 9.0f;
     float media[] = { cte, cte, cte, cte, cte, cte, cte, cte, cte };
@@ -275,6 +280,11 @@ void editor::laplaciano4x4() {
     }*/
 
     //ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+=======
+// Considerando uma matriz d 
+void editor::conv(int* matriz, int m, int n) {
+    int centroX = m / 2, centroY = n / 2;
+>>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
 }
 
 // Ajuda
