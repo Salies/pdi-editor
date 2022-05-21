@@ -142,6 +142,8 @@
     <addaction name="actionAddSaltPepper"/>
     <addaction name="actionMedia3x3"/>
     <addaction name="actionMediana3x3"/>
+    <addaction name="actionBinariza"/>
+    <addaction name="actionLaplaciano4x4"/>
     <addaction name="separator"/>
     <addaction name="action_paraCinza"/>
     <addaction name="actionInverte_colorida"/>
@@ -236,6 +238,16 @@
   <action name="actionMediana3x3">
    <property name="text">
     <string>Mediana 3x3</string>
+   </property>
+  </action>
+  <action name="actionBinariza">
+   <property name="text">
+    <string>Binarização</string>
+   </property>
+  </action>
+  <action name="actionLaplaciano4x4">
+   <property name="text">
+    <string>Laplaciano (4x4)</string>
    </property>
   </action>
  </widget>

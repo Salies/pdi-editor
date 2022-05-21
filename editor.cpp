@@ -44,6 +44,8 @@ editor::editor(QWidget *parent)
     connect(ui.actionAddSaltPepper, &QAction::triggered, this, &editor::addSaltPepper);
     connect(ui.actionMedia3x3, &QAction::triggered, this, &editor::media3x3);
     connect(ui.actionMediana3x3, &QAction::triggered, this, &editor::mediana3x3);
+    connect(ui.actionBinariza, &QAction::triggered, this, &editor::binariza);
+    connect(ui.actionLaplaciano4x4, &QAction::triggered, this, &editor::laplaciano4x4);
 }
 
 // Arquivo
@@ -56,7 +58,7 @@ void editor::abrir() {
     // Algumas imagens escala de cinza não são interpretadas como tais pelo Qt.
     // Isto é corrigido aqui.
     QImage::Format f = img.format();
-    if (img.isGrayscale() && f != QImage::Format_Grayscale8 && f != QImage::Format_Indexed8) {
+    if (img.isGrayscale() && f != QImage::Format_Grayscale8/* && f != QImage::Format_Indexed8*/) {
         qDebug() << "Formato atual:" << img.format();
         img = img.convertToFormat(QImage::Format_Grayscale8);
     }
@@ -156,18 +158,20 @@ void editor::media3x3() {
     float cte = 1.0f / 9.0f;
     float media[] = { cte, cte, cte, cte, cte, cte, cte, cte, cte };
     convolucao(media, 3, 3);
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
-void editor::convolucao(float *matriz, int mWidth, int mHeight) {
-    const int imgWidth = img.width(), imgHeight = img.height(),
-        mCentroJ = mWidth / 2, mCentroI = mHeight / 2;
-    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0; // atribui 0 só pra não dar erro de "memória não incilizada"
+void editor::convolucao(float *matriz, int mWidth, int mHeight, int div) {
+    /*const int imgWidth = img.width(), imgHeight = img.height(),
+        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
+    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, c; // atribui 0 só pra não dar erro de "memória não incilizada"
 
     imgB = img.copy();
-    uchar* bits = img.bits(), *bitsB = imgB.bits(), accCor;
+    uchar* bitsB = imgB.bits();
+    int accCor;
 
-    for (int j = 0; j < imgHeight; j++) { // p/ cada linha da imagem
-        for (int i = 0; i < imgWidth; i++) { // p/ cada coluna da imagem
+    for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
+        for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
             accCor = 0;
             for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
                 // a matriz de covolução será "espelhada"
@@ -176,47 +180,101 @@ void editor::convolucao(float *matriz, int mWidth, int mHeight) {
                     offsetI = mWidth - mi - 1;
                     limJ = j + mCentroI - offsetJ;
                     limI = i + mCentroJ - offsetI;
-                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth)
-                        accCor += bits[(imgWidth * limJ) + limI] * matriz[(mWidth * offsetJ) + offsetI];
+                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
+                        accCor += img.pixelColor(limI, limJ).red() * matriz[(mWidth * offsetJ) + offsetI];
+                    }
                 }
             }
-            bitsB[(imgWidth * j) + i] = accCor;
+            qDebug() << "pixel: " << (imgWidth * j) + i << accCor / div;
+            c = accCor / div;
+            bitsB[5] = 127;
+            //qDebug() << (imgWidth * j) + i << accCor << matriz[(mWidth * offsetJ) + offsetI];
+            //imgB.setPixelColor(i, j, qRgb(accCor / div, accCor / div, accCor / div));
         }
     }
 
-    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));*/
+
+    imgB = img.copy();
+
+    uchar* bits = nullptr;
+
+    int teste[9] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+
+    for (int j = 0; j < img.height(); j++) {
+        bits = imgB.scanLine(j);
+        for (int i = 0; i < img.width(); i++) {
+            //qDebug() << teste[(img.height() * j) + i];
+            qDebug() << bits[i];
+        }
+    }
 }
 
 // TODO: CONSERTAR ACESSO ILEGAL A MEMORIA
 void editor::mediana(int mWidth, int mHeight) {
-    const int mCentroJ = mWidth / 2, mCentroI = mHeight / 2,
-        imgWidth = img.width(), imgHeight = img.height();
+    const int imgWidth = img.width(), imgHeight = img.height(),
+        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1, mCentro = (mWidth * mHeight) >> 1;
+    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0;
     int pos; // posição atual do vetor mediana
     imgB = img.copy();
     const uchar* bits = img.bits();
     uchar *bitsB = imgB.bits();
     std::vector<uchar> mdn(mWidth * mHeight);
 
-    // CONSERTAR FOR
-    /*for (int j = 0; j < img.width() - mCentroJ; j++) {
-        for (int i = 0; i < img.height() - mCentroI; i++) {
+
+    for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
+        for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
             pos = 0;
-            for (int mj = 0; mj < mWidth; mj++) {
-                for (int mi = 0; mi < mHeight; mi++) {
-                    mdn[pos] = bits[(imgWidth * (j + mj - mCentroJ)) + i + mi - mCentroI]; // ESTOURANDO AQUI
-                    pos++;
+            for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
+                // a matriz de covolução será "espelhada"
+                offsetJ = mHeight - mj - 1;
+                for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
+                    offsetI = mWidth - mi - 1;
+                    limJ = j + mCentroI - offsetJ;
+                    limI = i + mCentroJ - offsetI;
+                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
+                        mdn[pos] = bits[(imgWidth * limJ) + limI];
+                        pos++;
+                    }
                 }
             }
             std::sort(mdn.begin(), mdn.end());
-            bitsB[(imgWidth * j) + i] = mdn[(int)std::round((mWidth * mHeight) / 2)];
+            bitsB[(imgWidth * j) + i] = mdn[mCentro];
         }
-    }*/
+    }
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::mediana3x3() {
     mediana(3, 3);
+}
+
+void editor::binariza() {
+    imgB = img.copy();
+    const uchar* bits = img.bits();
+    uchar* bitsB = imgB.bits();
+    for (int i = 0; i < img.width() * img.height(); i++) {
+        if (bits[i] < 128) {
+            bitsB[i] = 0;
+            continue;
+        }
+        bitsB[i] = 255;
+    }
+
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+}
+
+void editor::laplaciano4x4() {
+    float laplaciano[] = { 0, -1, 0, -1, 4, -1, 0, -1, 0};
+    convolucao(laplaciano, 3, 3, 8);
+    //const uchar* bitsB = imgB.bits();
+    /*qDebug() << imgB.format();
+    for (int i = 0; i < 9; i++) {
+        qDebug() << bitsB[i];
+    }*/
+
+    //ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 // Ajuda

@@ -31,7 +31,9 @@ private slots:
     void media3x3();
     void mediana3x3();
     void mediana(int mWidth, int mHeight);
-    void convolucao(float* matriz, int mWidth, int mHeight);
+    void convolucao(float* matriz, int mWidth, int mHeight, int div = 1);
+    void binariza();
+    void laplaciano4x4();
     // Ajuda
     void janelaSobre();
     // Outros
