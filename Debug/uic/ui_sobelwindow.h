@@ -38,11 +38,12 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         scrollArea = new QScrollArea(ui_sobelwindow);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setMinimumSize(QSize(514, 514));
         scrollArea->setMaximumSize(QSize(514, 514));
         scrollArea->setWidgetResizable(true);
         label = new MainLabel();
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(0, 0, 0, 0));
+        label->setGeometry(QRect(0, 0, 512, 512));
         label->setMouseTracking(true);
         scrollArea->setWidget(label);
 
@@ -69,7 +70,7 @@ public:
 
     void retranslateUi(QWidget *ui_sobelwindow)
     {
-        ui_sobelwindow->setWindowTitle(QCoreApplication::translate("ui_sobelwindow", "Form", nullptr));
+        ui_sobelwindow->setWindowTitle(QCoreApplication::translate("ui_sobelwindow", "Sobel", nullptr));
         mag->setText(QCoreApplication::translate("ui_sobelwindow", "<html><head/><body><p><span style=\" font-weight:600;\">mag:</span> 0, <span style=\" font-weight:600;\">dir:</span> 0\302\272</p></body></html>", nullptr));
     } // retranslateUi
 

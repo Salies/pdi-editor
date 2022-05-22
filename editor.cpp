@@ -338,6 +338,8 @@ void editor::laplaciano4x4() {
 
 void editor::sobel() {
     int w = img.width(), h = img.height();
+    // Não há vazamento de memória.
+    // dx, dy e mag são excluídos pelo destrutor de SobelWindow.
     int* dx = new int[w * h], *dy = new int[w * h], *mag = new int[w * h], i, j, max = -256, min = 256;
     float sobel_x[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1}, sobel_y[] = { -1, -2, -1, 0, 0, 0, 1, 2, 1 };
     convolucao(sobel_x, 3, 3, dx);
@@ -361,10 +363,6 @@ void editor::sobel() {
         for (i = 1; i < w - 1; i++)
             bits[i] = ((mag[(w * j) + i] - min) / (float)(max - min)) * 255;
     }
-
-    /*delete dx;
-    delete dy;
-    delete mag;*/
 
     SobelWindow* sw = new SobelWindow(this, imgB, mag, dx, dy);
     sw->show();

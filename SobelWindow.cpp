@@ -1,7 +1,8 @@
 #include "SobelWindow.h"
 #include "mainlabel.h"
+#include <cmath>
 
-#include <QDebug>
+# define M_PI 3.14159265358979323846
 
 SobelWindow::~SobelWindow() {
 	delete dx;
@@ -29,5 +30,8 @@ void SobelWindow::moveu(int x, int y) {
 		return;
 	}
 
-	ui.mag->setText("<b>mag:</b> " + QString::number(mag[(w * y) + x]));
+	QString direcao = "Gx = 0";
+	if (dx[(w * y) + x] != 0)
+		direcao = QString::number((int)(180.0 + std::atan2(dy[(w * y) + x], dx[(w * y) + x]) / M_PI * 180.0)) + '\xb0';
+	ui.mag->setText("<b>mag:</b> " + QString::number(mag[(w * y) + x]) + ", <b>dir:</b> " + direcao);
 }

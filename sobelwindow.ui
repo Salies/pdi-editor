@@ -11,11 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Sobel</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="minimumSize">
+      <size>
+       <width>514</width>
+       <height>514</height>
+      </size>
+     </property>
      <property name="maximumSize">
       <size>
        <width>514</width>
@@ -30,8 +36,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>0</width>
-        <height>0</height>
+        <width>512</width>
+        <height>512</height>
        </rect>
       </property>
       <property name="mouseTracking">
@@ -58,7 +64,7 @@
    </item>
   </layout>
  </widget>
-  <customwidgets>
+ <customwidgets>
   <customwidget>
    <class>MainLabel</class>
    <extends>QWidget</extends>
