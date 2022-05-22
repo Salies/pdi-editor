@@ -22,13 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_editor_t {
-<<<<<<< HEAD
     QByteArrayData data[28];
     char stringdata0[277];
-=======
-    QByteArrayData data[20];
-    char stringdata0[199];
->>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,7 +43,6 @@ QT_MOC_LITERAL(7, 55, 12), // "inverteCinza"
 QT_MOC_LITERAL(8, 68, 15), // "inverteColorido"
 QT_MOC_LITERAL(9, 84, 19), // "equalizarHistograma"
 QT_MOC_LITERAL(10, 104, 13), // "addSaltPepper"
-<<<<<<< HEAD
 QT_MOC_LITERAL(11, 118, 8), // "media3x3"
 QT_MOC_LITERAL(12, 127, 10), // "mediana3x3"
 QT_MOC_LITERAL(13, 138, 7), // "mediana"
@@ -66,29 +60,14 @@ QT_MOC_LITERAL(24, 243, 16), // "converterRGB_HSL"
 QT_MOC_LITERAL(25, 260, 12), // "atualizarPos"
 QT_MOC_LITERAL(26, 273, 1), // "x"
 QT_MOC_LITERAL(27, 275, 1) // "y"
-=======
-QT_MOC_LITERAL(11, 118, 4), // "conv"
-QT_MOC_LITERAL(12, 123, 4), // "int*"
-QT_MOC_LITERAL(13, 128, 6), // "matriz"
-QT_MOC_LITERAL(14, 135, 11), // "janelaSobre"
-QT_MOC_LITERAL(15, 147, 17), // "copiaParaEsquerda"
-QT_MOC_LITERAL(16, 165, 16), // "converterRGB_HSL"
-QT_MOC_LITERAL(17, 182, 12), // "atualizarPos"
-QT_MOC_LITERAL(18, 195, 1), // "x"
-QT_MOC_LITERAL(19, 197, 1) // "y"
->>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
 
     },
     "editor\0abrir\0\0salvar\0sair\0converteParaCinza\0"
     "dividirRGB\0inverteCinza\0inverteColorido\0"
     "equalizarHistograma\0addSaltPepper\0"
-<<<<<<< HEAD
     "media3x3\0mediana3x3\0mediana\0mWidth\0"
     "mHeight\0convolucao\0float*\0matriz\0div\0"
     "binariza\0laplaciano4x4\0janelaSobre\0"
-=======
-    "conv\0int*\0matriz\0janelaSobre\0"
->>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
     "copiaParaEsquerda\0converterRGB_HSL\0"
     "atualizarPos\0x\0y"
 };
@@ -100,11 +79,7 @@ static const uint qt_meta_data_editor[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-<<<<<<< HEAD
       20,   14, // methods
-=======
-      14,   14, // methods
->>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -112,7 +87,6 @@ static const uint qt_meta_data_editor[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-<<<<<<< HEAD
        1,    0,  114,    2, 0x08 /* Private */,
        3,    0,  115,    2, 0x08 /* Private */,
        4,    0,  116,    2, 0x08 /* Private */,
@@ -133,22 +107,6 @@ static const uint qt_meta_data_editor[] = {
       23,    0,  149,    2, 0x08 /* Private */,
       24,    0,  150,    2, 0x08 /* Private */,
       25,    2,  151,    2, 0x08 /* Private */,
-=======
-       1,    0,   84,    2, 0x08 /* Private */,
-       3,    0,   85,    2, 0x08 /* Private */,
-       4,    0,   86,    2, 0x08 /* Private */,
-       5,    0,   87,    2, 0x08 /* Private */,
-       6,    0,   88,    2, 0x08 /* Private */,
-       7,    0,   89,    2, 0x08 /* Private */,
-       8,    0,   90,    2, 0x08 /* Private */,
-       9,    0,   91,    2, 0x08 /* Private */,
-      10,    0,   92,    2, 0x08 /* Private */,
-      11,    1,   93,    2, 0x08 /* Private */,
-      14,    0,   96,    2, 0x08 /* Private */,
-      15,    0,   97,    2, 0x08 /* Private */,
-      16,    0,   98,    2, 0x08 /* Private */,
-      17,    2,   99,    2, 0x08 /* Private */,
->>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
 
  // slots: parameters
     QMetaType::Void,
@@ -160,22 +118,17 @@ static const uint qt_meta_data_editor[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 12,   13,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,   14,   15,
     QMetaType::Void, 0x80000000 | 17, QMetaType::Int, QMetaType::Int, QMetaType::Int,   18,   14,   15,   19,
     QMetaType::Void, 0x80000000 | 17, QMetaType::Int, QMetaType::Int,   18,   14,   15,
     QMetaType::Void,
-<<<<<<< HEAD
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,   26,   27,
-=======
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   18,   19,
->>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
 
        0        // eod
 };
@@ -195,7 +148,6 @@ void editor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 6: _t->inverteColorido(); break;
         case 7: _t->equalizarHistograma(); break;
         case 8: _t->addSaltPepper(); break;
-<<<<<<< HEAD
         case 9: _t->media3x3(); break;
         case 10: _t->mediana3x3(); break;
         case 11: _t->mediana((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
@@ -207,13 +159,6 @@ void editor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 17: _t->copiaParaEsquerda(); break;
         case 18: _t->converterRGB_HSL(); break;
         case 19: _t->atualizarPos((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-=======
-        case 9: _t->conv((*reinterpret_cast< int*(*)>(_a[1]))); break;
-        case 10: _t->janelaSobre(); break;
-        case 11: _t->copiaParaEsquerda(); break;
-        case 12: _t->converterRGB_HSL(); break;
-        case 13: _t->atualizarPos((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
->>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
         default: ;
         }
     }
@@ -248,7 +193,6 @@ int editor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-<<<<<<< HEAD
         if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 20;
@@ -256,15 +200,6 @@ int editor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 20)
             *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 20;
-=======
-        if (_id < 14)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
->>>>>>> eeaf110b277583b02818cbcca5d26dbcee2750bd
     }
     return _id;
 }
