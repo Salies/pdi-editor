@@ -247,7 +247,7 @@
   </action>
   <action name="actionLaplaciano4x4">
    <property name="text">
-    <string>Laplaciano (4x4)</string>
+    <string>Laplaciano (3x3)</string>
    </property>
   </action>
  </widget>

@@ -209,7 +209,7 @@ public:
         actionMedia3x3->setText(QCoreApplication::translate("editorClass", "M\303\251dia 3x3", nullptr));
         actionMediana3x3->setText(QCoreApplication::translate("editorClass", "Mediana 3x3", nullptr));
         actionBinariza->setText(QCoreApplication::translate("editorClass", "Binariza\303\247\303\243o", nullptr));
-        actionLaplaciano4x4->setText(QCoreApplication::translate("editorClass", "Laplaciano (4x4)", nullptr));
+        actionLaplaciano4x4->setText(QCoreApplication::translate("editorClass", "Laplaciano (3x3)", nullptr));
         label_img1->setProperty("text", QVariant(QString()));
         pushButton->setText(QCoreApplication::translate("editorClass", "\360\237\241\204", nullptr));
         label_img2->setText(QString());
