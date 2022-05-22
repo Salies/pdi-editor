@@ -200,36 +200,35 @@ void editor::convolucao(float *matriz, int mWidth, int mHeight, int div) {
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
-// TODO: CONSERTAR ACESSO ILEGAL A MEMORIA
 void editor::mediana(int mWidth, int mHeight) {
     const int imgWidth = img.width(), imgHeight = img.height(),
         mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1, mCentro = (mWidth * mHeight) >> 1;
     int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0;
     int pos; // posição atual do vetor mediana
     imgB = img.copy();
-    const uchar* bits = img.bits();
-    uchar *bitsB = imgB.bits();
+    uchar* bits = nullptr, *bitsB = nullptr;
     std::vector<uchar> mdn(mWidth * mHeight);
 
-
     for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
+        bitsB = imgB.scanLine(j);
         for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
             pos = 0;
             for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
                 // a matriz de covolução será "espelhada"
                 offsetJ = mHeight - mj - 1;
+                limJ = j + mCentroI - offsetJ;
+                bits = img.scanLine(limJ);
                 for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
                     offsetI = mWidth - mi - 1;
-                    limJ = j + mCentroI - offsetJ;
                     limI = i + mCentroJ - offsetI;
                     if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
-                        mdn[pos] = bits[(imgWidth * limJ) + limI];
+                        mdn[pos] = bits[limI];
                         pos++;
                     }
                 }
             }
             std::sort(mdn.begin(), mdn.end());
-            bitsB[(imgWidth * j) + i] = mdn[mCentro];
+            bitsB[i] = mdn[mCentro];
         }
     }
 
@@ -242,14 +241,17 @@ void editor::mediana3x3() {
 
 void editor::binariza() {
     imgB = img.copy();
-    const uchar* bits = img.bits();
-    uchar* bitsB = imgB.bits();
-    for (int i = 0; i < img.width() * img.height(); i++) {
-        if (bits[i] < 128) {
-            bitsB[i] = 0;
-            continue;
+
+    uchar* bits = nullptr;
+    for (int j = 0; j < img.height(); j++) {
+        bits = imgB.scanLine(j);
+        for (int i = 0; i < img.width(); i++) {
+            if (bits[i] < 128) {
+                bits[i] = 0;
+                continue;
+            }
+            bits[i] = 255;
         }
-        bitsB[i] = 255;
     }
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
