@@ -150,7 +150,7 @@ void editor::addSaltPepper() {
     imgB = img.copy();
     int size = img.width() * img.height();
     int cores[2] = { 0, 255 };
-    uchar* bits = imgB.bits();
+    uchar* bits = imgB.scanLine(0);
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, size - 1);
