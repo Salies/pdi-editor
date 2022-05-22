@@ -1,5 +1,4 @@
 #include "mainlabel.h"
-#include <QDebug>
 
 MainLabel::MainLabel() {
 	setMouseTracking(true);

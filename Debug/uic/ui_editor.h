@@ -115,7 +115,7 @@ public:
         scroll_img1->setWidgetResizable(true);
         label_img1 = new MainLabel();
         label_img1->setObjectName(QString::fromUtf8("label_img1"));
-        label_img1->setGeometry(QRect(0, 0, 512, 512));
+        label_img1->setGeometry(QRect(0, 0, 0, 0));
         label_img1->setMinimumSize(QSize(0, 0));
         scroll_img1->setWidget(label_img1);
 

@@ -52,6 +52,9 @@
     <ClCompile Include="histoEq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SobelWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="sobre.ui">
@@ -64,6 +67,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="histoEq.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="sobelwindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -81,6 +87,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="histoEq.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SobelWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "divideRGB.h"
 #include "conv_hsl.h"
 #include "histoEq.h"
+#include "SobelWindow.h"
 #include <random>
 #include <algorithm>
 #include <functional>
@@ -63,7 +64,7 @@ void editor::abrir() {
         img = img.convertToFormat(QImage::Format_Grayscale8);
 
     // Redimensionando o QLabel para que ele exiba toda a imagem
-    ui.label_img1->resize(img.width(), img.height());
+    ui.label_img1->setFixedSize(img.width(), img.height());
     ui.label_img1->setPixmap(QPixmap::fromImage(img));
 }
 
@@ -357,12 +358,16 @@ void editor::sobel() {
     uchar* bits = nullptr;
     for (j = 1; j < h - 1; j++) {
         bits = imgB.scanLine(j);
-        for (i = 1; i < w - 1; i++) {
+        for (i = 1; i < w - 1; i++)
             bits[i] = ((mag[(w * j) + i] - min) / (float)(max - min)) * 255;
-        }
     }
 
-    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+    /*delete dx;
+    delete dy;
+    delete mag;*/
+
+    SobelWindow* sw = new SobelWindow(this, imgB, mag, dx, dy);
+    sw->show();
 }
 
 // Ajuda
