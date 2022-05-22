@@ -144,6 +144,7 @@
     <addaction name="actionMediana3x3"/>
     <addaction name="actionBinariza"/>
     <addaction name="actionLaplaciano4x4"/>
+    <addaction name="actionSobel"/>
     <addaction name="separator"/>
     <addaction name="action_paraCinza"/>
     <addaction name="actionInverte_colorida"/>
@@ -248,6 +249,11 @@
   <action name="actionLaplaciano4x4">
    <property name="text">
     <string>Laplaciano (3x3)</string>
+   </property>
+  </action>
+  <action name="actionSobel">
+   <property name="text">
+    <string>Sobel</string>
    </property>
   </action>
  </widget>

@@ -47,6 +47,7 @@ editor::editor(QWidget *parent)
     connect(ui.actionMediana3x3, &QAction::triggered, this, &editor::mediana3x3);
     connect(ui.actionBinariza, &QAction::triggered, this, &editor::binariza);
     connect(ui.actionLaplaciano4x4, &QAction::triggered, this, &editor::laplaciano4x4);
+    connect(ui.actionSobel, &QAction::triggered, this, &editor::sobel);
 }
 
 // Arquivo
@@ -233,6 +234,33 @@ void editor::convolucao(float* matriz, int mWidth, int mHeight, std::function<vo
     }
 }
 
+void editor::convolucao(float* matriz, int mWidth, int mHeight, int *out) {
+    const int imgWidth = img.width(), imgHeight = img.height(),
+        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
+    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, accCor; // (áté accCor) atribui 0 só pra não dar erro de "memória não incilizada"
+    uchar* bits = nullptr;
+
+    for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
+        for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
+            accCor = 0;
+            for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
+                // a matriz de covolução será "espelhada"
+                offsetJ = mHeight - mj - 1;
+                limJ = j + mCentroI - offsetJ;
+                bits = img.scanLine(limJ);
+                for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
+                    offsetI = mWidth - mi - 1;
+                    limI = i + mCentroJ - offsetI;
+                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
+                        accCor += bits[limI] * matriz[(mWidth * offsetJ) + offsetI];
+                    }
+                }
+            }
+            out[(imgWidth * j) + i] = accCor;
+        }
+    }
+}
+
 void editor::mediana(int mWidth, int mHeight) {
     const int imgWidth = img.width(), imgHeight = img.height(),
         mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1, mCentro = (mWidth * mHeight) >> 1;
@@ -290,14 +318,51 @@ void editor::binariza() {
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
+/*void print_matriz(int x, int y, int* m) {
+    QDebug deb = qDebug();
+    int i, j;
+    for (j = 0; j < y; j++) {
+        for (i = 0; i < x; i++) {
+            deb.space() << m[(x * j) + i];
+        }
+        deb.nospace() << "\n";
+    }
+}*/
+
 void editor::laplaciano4x4() {
     float laplaciano[] = { 0, -1, 0, -1, 4, -1, 0, -1, 0};
     convolucao(laplaciano, 3, 3, [](int *v) { *v = std::abs( * v) / 8; });
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
-int editor::f_laplaciano(int v) {
-    return std::abs(v) / 8;
+void editor::sobel() {
+    int w = img.width(), h = img.height();
+    int* dx = new int[w * h], *dy = new int[w * h], *mag = new int[w * h], i, j, max = -256, min = 256;
+    float sobel_x[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1}, sobel_y[] = { -1, -2, -1, 0, 0, 0, 1, 2, 1 };
+    convolucao(sobel_x, 3, 3, dx);
+    convolucao(sobel_y, 3, 3, dy);
+    // Calculando a magnitude e extraindo o máximo e o mínimo
+    for (i = 1; i < w - 1; i++) {
+        for (j = 1; j < h - 1; j++) {
+            mag[(w * j) + i] = (int)std::sqrt((dx[(w * j) + i] * dx[(w * j) + i]) + (dy[(w * j) + i] * dy[(w * j) + i]));
+            if (mag[(w * j) + i] > max)
+                max = mag[(w * j) + i];
+            if (mag[(w * j) + i] < min)
+                min = mag[(w * j) + i];
+        }
+    }
+
+    // Normalizando e montando imagem
+    imgB = img.copy();
+    uchar* bits = nullptr;
+    for (j = 1; j < h - 1; j++) {
+        bits = imgB.scanLine(j);
+        for (i = 1; i < w - 1; i++) {
+            bits[i] = ((mag[(w * j) + i] - min) / (float)(max - min)) * 255;
+        }
+    }
+
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 // Ajuda

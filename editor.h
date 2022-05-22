@@ -33,9 +33,10 @@ private slots:
     void mediana(int mWidth, int mHeight);
     void convolucao(float* matriz, int mWidth, int mHeight);
     void convolucao(float* matriz, int mWidth, int mHeight, std::function<void(int*)> f);
+    void convolucao(float* matriz, int mWidth, int mHeight, int *out);
     void binariza();
     void laplaciano4x4();
-    int f_laplaciano(int v);
+    void sobel();
     // Ajuda
     void janelaSobre();
     // Outros
