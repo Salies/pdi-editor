@@ -5,6 +5,7 @@
 #include "histoEq.h"
 #include <random>
 #include <algorithm>
+#include <functional>
 #include <QFileDialog>
 
 #include <qwt_plot.h>
@@ -169,12 +170,12 @@ void editor::media3x3() {
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
-void editor::convolucao(float *matriz, int mWidth, int mHeight, int div) {
+void editor::convolucao(float *matriz, int mWidth, int mHeight) {
     imgB = img.copy();
 
     const int imgWidth = img.width(), imgHeight = img.height(),
         mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
-    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, accCor = 0; // (áté accCor) atribui 0 só pra não dar erro de "memória não incilizada"
+    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, accCor; // (áté accCor) atribui 0 só pra não dar erro de "memória não incilizada"
     uchar* bitsB = nullptr, *bits = nullptr;
 
     for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
@@ -194,7 +195,40 @@ void editor::convolucao(float *matriz, int mWidth, int mHeight, int div) {
                     }
                 }
             }
-            bitsB[i] = accCor / div;
+            bitsB[i] = accCor;
+        }
+    }
+}
+
+// Versão overloaded de convolucao() para quando os valores precisam de algum tratamento,
+// representado aqui pelo parâmetro f. Ex.: no filtro Laplaciano f(x) = |x| / 8.
+void editor::convolucao(float* matriz, int mWidth, int mHeight, std::function<void(int*)> f) {
+    imgB = img.copy();
+
+    const int imgWidth = img.width(), imgHeight = img.height(),
+        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
+    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, accCor; // (áté accCor) atribui 0 só pra não dar erro de "memória não incilizada"
+    uchar* bitsB = nullptr, * bits = nullptr;
+
+    for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
+        bitsB = imgB.scanLine(j);
+        for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
+            accCor = 0;
+            for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
+                // a matriz de covolução será "espelhada"
+                offsetJ = mHeight - mj - 1;
+                limJ = j + mCentroI - offsetJ;
+                bits = img.scanLine(limJ);
+                for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
+                    offsetI = mWidth - mi - 1;
+                    limI = i + mCentroJ - offsetI;
+                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
+                        accCor += bits[limI] * matriz[(mWidth * offsetJ) + offsetI];
+                    }
+                }
+            }
+            f(&accCor);
+            bitsB[i] = accCor;
         }
     }
 }
@@ -258,8 +292,12 @@ void editor::binariza() {
 
 void editor::laplaciano4x4() {
     float laplaciano[] = { 0, -1, 0, -1, 4, -1, 0, -1, 0};
-    convolucao(laplaciano, 3, 3, 8);
+    convolucao(laplaciano, 3, 3, [](int *v) { *v = std::abs( * v) / 8; });
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+}
+
+int editor::f_laplaciano(int v) {
+    return std::abs(v) / 8;
 }
 
 // Ajuda
