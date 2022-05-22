@@ -166,6 +166,7 @@ void editor::media3x3() {
     float cte = 1.0f / 9.0f;
     float media[] = { cte, cte, cte, cte, cte, cte, cte, cte, cte };
     convolucao(media, 3, 3);
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::convolucao(float *matriz, int mWidth, int mHeight, int div) {
@@ -196,8 +197,6 @@ void editor::convolucao(float *matriz, int mWidth, int mHeight, int div) {
             bitsB[i] = accCor / div;
         }
     }
-
-    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::mediana(int mWidth, int mHeight) {
@@ -260,6 +259,7 @@ void editor::binariza() {
 void editor::laplaciano4x4() {
     float laplaciano[] = { 0, -1, 0, -1, 4, -1, 0, -1, 0};
     convolucao(laplaciano, 3, 3, 8);
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 // Ajuda
