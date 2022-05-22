@@ -14,9 +14,12 @@ histoEq::histoEq(const QImage& img, QImage *imgSaida, QLabel* labelSaida, QWidge
 	std::fill(h.begin(), h.end(), 0);
 
 	// Histograma
-	const uchar* bits = img.constBits();
-	for (int i = 0; i < (img.width() * img.height()); i++)
-		h[bits[i]]++;
+	const uchar* bits = nullptr;
+	for (int j = 0; j < img.height(); j++) {
+		bits = img.constScanLine(j); // abuso de notação
+		for (int i = 0; i < img.width(); i++)
+			h[bits[i]]++;
+	}
 	plot();
 
 	// Preparando para uma possível equalização
@@ -26,20 +29,23 @@ histoEq::histoEq(const QImage& img, QImage *imgSaida, QLabel* labelSaida, QWidge
 }
 
 void histoEq::eq() {
-	int freq_acc = 0, size = img_eq->width() * img_eq->height(), i;
+	int freq_acc = 0, width = img_eq->width(), height = img_eq->height(), i;
 	uchar* lut = new uchar[256]; // lookup table para economizar processamento
-	float escala = 255.0f / size;
+	float escala = 255.0f / (width * height);
 
 	for (i = 0; i < 256; i++) {
 		freq_acc += h[i];
 		lut[i] = (uchar)(freq_acc * escala);
 	}
 
-	uchar* bits = img_eq->bits();
+	uchar* bits = nullptr;
 	std::fill(h.begin(), h.end(), 0);
-	for (i = 0; i < size; i++) {
-		bits[i] = lut[bits[i]];
-		h[bits[i]]++;
+	for (int j = 0; j < height; j++) {
+		bits = img_eq->scanLine(j);
+		for (i = 0; i < width; i++) {
+			bits[i] = lut[bits[i]];
+			h[bits[i]]++;
+		}
 	}
 	plot();
 
