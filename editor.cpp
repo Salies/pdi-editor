@@ -57,11 +57,8 @@ void editor::abrir() {
 
     // Algumas imagens escala de cinza não são interpretadas como tais pelo Qt.
     // Isto é corrigido aqui.
-    QImage::Format f = img.format();
-    if (img.isGrayscale() && f != QImage::Format_Grayscale8/* && f != QImage::Format_Indexed8*/) {
-        qDebug() << "Formato atual:" << img.format();
+    if (img.allGray() && img.format() != QImage::Format_Grayscale8)
         img = img.convertToFormat(QImage::Format_Grayscale8);
-    }
 
     // Redimensionando o QLabel para que ele exiba toda a imagem
     ui.label_img1->resize(img.width(), img.height());
@@ -92,10 +89,13 @@ void editor::converteParaCinza() {
 
     imgB = img.copy();
     uchar cinza;
-    QRgb* data = (QRgb*)(imgB.bits());
-    for (int i = 0; i < (imgB.width() * imgB.height()); i++) {
-        cinza = (qRed(data[i]) + qGreen(data[i]) + qBlue(data[i])) / 3;
-        data[i] = qRgb(cinza, cinza, cinza);
+    QRgb* data;
+    for (int j = 0; j < img.height(); j++) {
+        data = (QRgb*)(imgB.scanLine(j));
+        for (int i = 0; i < img.width(); i++) {
+            cinza = (qRed(data[i]) + qGreen(data[i]) + qBlue(data[i])) / 3;
+            data[i] = qRgb(cinza, cinza, cinza);
+        }
     }
 
     imgB = imgB.convertToFormat(QImage::Format_Grayscale8);
@@ -107,9 +107,14 @@ void editor::inverteCinza() {
     if (!img.isGrayscale()) return;
 
     imgB = img.copy();
-    uchar* bits = imgB.bits();
-    for (int i = 0; i < (imgB.width() * imgB.height()); i ++)
-        bits[i] = 255 - bits[i];
+    uchar* bits = nullptr;
+
+    for (int j = 0; j < img.height(); j++) {
+        bits = imgB.scanLine(j);
+        for (int i = 0; i < img.width(); i++)
+            bits[i] = 255 - bits[i];
+    }
+
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
@@ -117,9 +122,12 @@ void editor::inverteColorido() {
     if (img.isGrayscale()) return;
 
     imgB = img.copy();
-    QRgb* data = (QRgb*)(imgB.bits());
-    for (int i = 0; i < (imgB.width() * imgB.height()); i ++)
-        data[i] = qRgb(255 - qRed(data[i]), 255 - qGreen(data[i]), 255 - qBlue(data[i]));
+    QRgb* data;
+    for (int j = 0; j < img.height(); j++) {
+        data = (QRgb*)(imgB.scanLine(j));
+        for (int i = 0; i < img.width(); i++)
+            data[i] = qRgb(255 - qRed(data[i]), 255 - qGreen(data[i]), 255 - qBlue(data[i]));
+    }
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
@@ -158,56 +166,38 @@ void editor::media3x3() {
     float cte = 1.0f / 9.0f;
     float media[] = { cte, cte, cte, cte, cte, cte, cte, cte, cte };
     convolucao(media, 3, 3);
-    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::convolucao(float *matriz, int mWidth, int mHeight, int div) {
-    /*const int imgWidth = img.width(), imgHeight = img.height(),
-        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
-    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, c; // atribui 0 só pra não dar erro de "memória não incilizada"
-
     imgB = img.copy();
-    uchar* bitsB = imgB.bits();
-    int accCor;
+
+    const int imgWidth = img.width(), imgHeight = img.height(),
+        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
+    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, accCor = 0; // (áté accCor) atribui 0 só pra não dar erro de "memória não incilizada"
+    uchar* bitsB = nullptr, *bits = nullptr;
 
     for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
+        bitsB = imgB.scanLine(j);
         for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
             accCor = 0;
             for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
                 // a matriz de covolução será "espelhada"
                 offsetJ = mHeight - mj - 1;
+                limJ = j + mCentroI - offsetJ;
+                bits = img.scanLine(limJ);
                 for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
                     offsetI = mWidth - mi - 1;
-                    limJ = j + mCentroI - offsetJ;
                     limI = i + mCentroJ - offsetI;
                     if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
-                        accCor += img.pixelColor(limI, limJ).red() * matriz[(mWidth * offsetJ) + offsetI];
+                        accCor += bits[limI] * matriz[(mWidth * offsetJ) + offsetI];
                     }
                 }
             }
-            qDebug() << "pixel: " << (imgWidth * j) + i << accCor / div;
-            c = accCor / div;
-            bitsB[5] = 127;
-            //qDebug() << (imgWidth * j) + i << accCor << matriz[(mWidth * offsetJ) + offsetI];
-            //imgB.setPixelColor(i, j, qRgb(accCor / div, accCor / div, accCor / div));
+            bitsB[i] = accCor / div;
         }
     }
 
-    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));*/
-
-    imgB = img.copy();
-
-    uchar* bits = nullptr;
-
-    int teste[9] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-
-    for (int j = 0; j < img.height(); j++) {
-        bits = imgB.scanLine(j);
-        for (int i = 0; i < img.width(); i++) {
-            //qDebug() << teste[(img.height() * j) + i];
-            qDebug() << bits[i];
-        }
-    }
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 // TODO: CONSERTAR ACESSO ILEGAL A MEMORIA
@@ -268,13 +258,6 @@ void editor::binariza() {
 void editor::laplaciano4x4() {
     float laplaciano[] = { 0, -1, 0, -1, 4, -1, 0, -1, 0};
     convolucao(laplaciano, 3, 3, 8);
-    //const uchar* bitsB = imgB.bits();
-    /*qDebug() << imgB.format();
-    for (int i = 0; i < 9; i++) {
-        qDebug() << bitsB[i];
-    }*/
-
-    //ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 // Ajuda
