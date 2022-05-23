@@ -407,10 +407,6 @@ void editor::limiariza() {
     dialog->show();
 }
 
-void editor::llim() {
-
-}
-
 // Ajuda
 void editor::janelaSobre() {
     sobre *s = new sobre();
