@@ -37,8 +37,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>0</width>
-         <height>0</height>
+         <width>512</width>
+         <height>512</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -145,6 +145,8 @@
     <addaction name="actionBinariza"/>
     <addaction name="actionLaplaciano4x4"/>
     <addaction name="actionSobel"/>
+    <addaction name="actionDRC"/>
+    <addaction name="actionLiminha"/>
     <addaction name="separator"/>
     <addaction name="action_paraCinza"/>
     <addaction name="actionInverte_colorida"/>
@@ -254,6 +256,16 @@
   <action name="actionSobel">
    <property name="text">
     <string>Sobel</string>
+   </property>
+  </action>
+  <action name="actionDRC">
+   <property name="text">
+    <string>Compressão de escala dinâmica</string>
+   </property>
+  </action>
+  <action name="actionLiminha">
+   <property name="text">
+    <string>Limiarização</string>
    </property>
   </action>
  </widget>

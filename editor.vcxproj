@@ -106,6 +106,7 @@
     <ClCompile Include="editor.cpp" />
     <ClCompile Include="main.cpp" />
     <QtUic Include="histoEq.ui" />
+    <QtUic Include="limiariza.ui" />
     <QtUic Include="sobelwindow.ui" />
     <QtUic Include="sobre.ui" />
   </ItemGroup>

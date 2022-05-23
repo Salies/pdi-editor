@@ -4,10 +4,12 @@
 #include "conv_hsl.h"
 #include "histoEq.h"
 #include "SobelWindow.h"
+#include "ui_limiariza.h"
 #include <random>
 #include <algorithm>
 #include <functional>
 #include <QFileDialog>
+#include <cmath>
 
 #include <qwt_plot.h>
 #include <qwt_plot_barchart.h>
@@ -49,6 +51,8 @@ editor::editor(QWidget *parent)
     connect(ui.actionBinariza, &QAction::triggered, this, &editor::binariza);
     connect(ui.actionLaplaciano4x4, &QAction::triggered, this, &editor::laplaciano4x4);
     connect(ui.actionSobel, &QAction::triggered, this, &editor::sobel);
+    connect(ui.actionDRC, &QAction::triggered, this, &editor::drc);
+    connect(ui.actionLiminha, &QAction::triggered, this, &editor::limiariza);
 }
 
 // Arquivo
@@ -364,8 +368,47 @@ void editor::sobel() {
             bits[i] = ((mag[(w * j) + i] - min) / (float)(max - min)) * 255;
     }
 
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+
     SobelWindow* sw = new SobelWindow(this, imgB, mag, dx, dy);
     sw->show();
+}
+
+void editor::drc() {
+    float c = 1.0f, gamma = 0.4f;
+
+    imgB = img.copy();
+    uchar* bits = nullptr;
+    for (int j = 0; j < img.height(); j++) {
+        bits = imgB.scanLine(j);
+        for (int i = 0; i < img.width(); i++)
+            bits[i] = (int)std::pow(c * bits[i], gamma);
+    }
+
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+}
+
+void editor::limiariza() {
+    QDialog* dialog = new QDialog(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    Ui::ui_lim uid;
+    uid.setupUi(dialog);
+    connect(uid.okButton, &QPushButton::clicked, this, [=](void) {
+        imgB = img.copy();
+        int limiar = uid.spinBox->value();
+        uchar* bits = nullptr;
+        for (int j = 0; j < img.height(); j++) {
+            bits = imgB.scanLine(j);
+            for (int i = 0; i < img.width(); i++)
+                if (bits[i] < limiar) bits[i] = 0;
+        }
+        ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+    });
+    dialog->show();
+}
+
+void editor::llim() {
+
 }
 
 // Ajuda

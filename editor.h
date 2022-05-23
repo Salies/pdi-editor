@@ -15,6 +15,7 @@ private:
     QImage img, imgB; // imagem a ser manipulada
     QLabel *sbMsg;
     QWidget* corAtual;
+    int iiiii = 0;
 
 private slots:
     // Arquivo
@@ -37,6 +38,9 @@ private slots:
     void binariza();
     void laplaciano4x4();
     void sobel();
+    void drc();
+    void limiariza();
+    void llim();
     // Ajuda
     void janelaSobre();
     // Outros

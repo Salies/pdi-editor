@@ -72,6 +72,9 @@
     <QtUic Include="sobelwindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="limiariza.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="sobre.h">

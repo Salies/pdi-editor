@@ -45,6 +45,8 @@ public:
     QAction *actionBinariza;
     QAction *actionLaplaciano4x4;
     QAction *actionSobel;
+    QAction *actionDRC;
+    QAction *actionLiminha;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QScrollArea *scroll_img1;
@@ -98,6 +100,10 @@ public:
         actionLaplaciano4x4->setObjectName(QString::fromUtf8("actionLaplaciano4x4"));
         actionSobel = new QAction(editorClass);
         actionSobel->setObjectName(QString::fromUtf8("actionSobel"));
+        actionDRC = new QAction(editorClass);
+        actionDRC->setObjectName(QString::fromUtf8("actionDRC"));
+        actionLiminha = new QAction(editorClass);
+        actionLiminha->setObjectName(QString::fromUtf8("actionLiminha"));
         centralWidget = new QWidget(editorClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -115,7 +121,7 @@ public:
         scroll_img1->setWidgetResizable(true);
         label_img1 = new MainLabel();
         label_img1->setObjectName(QString::fromUtf8("label_img1"));
-        label_img1->setGeometry(QRect(0, 0, 0, 0));
+        label_img1->setGeometry(QRect(0, 0, 512, 512));
         label_img1->setMinimumSize(QSize(0, 0));
         scroll_img1->setWidget(label_img1);
 
@@ -180,6 +186,8 @@ public:
         menu_Operacoes->addAction(actionBinariza);
         menu_Operacoes->addAction(actionLaplaciano4x4);
         menu_Operacoes->addAction(actionSobel);
+        menu_Operacoes->addAction(actionDRC);
+        menu_Operacoes->addAction(actionLiminha);
         menu_Operacoes->addSeparator();
         menu_Operacoes->addAction(action_paraCinza);
         menu_Operacoes->addAction(actionInverte_colorida);
@@ -215,6 +223,8 @@ public:
         actionBinariza->setText(QCoreApplication::translate("editorClass", "Binariza\303\247\303\243o", nullptr));
         actionLaplaciano4x4->setText(QCoreApplication::translate("editorClass", "Laplaciano (3x3)", nullptr));
         actionSobel->setText(QCoreApplication::translate("editorClass", "Sobel", nullptr));
+        actionDRC->setText(QCoreApplication::translate("editorClass", "Compress\303\243o de escala din\303\242mica", nullptr));
+        actionLiminha->setText(QCoreApplication::translate("editorClass", "Limiariza\303\247\303\243o", nullptr));
         label_img1->setProperty("text", QVariant(QString()));
         pushButton->setText(QCoreApplication::translate("editorClass", "\360\237\241\204", nullptr));
         label_img2->setText(QString());

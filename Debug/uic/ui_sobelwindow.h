@@ -33,6 +33,7 @@ public:
     {
         if (ui_sobelwindow->objectName().isEmpty())
             ui_sobelwindow->setObjectName(QString::fromUtf8("ui_sobelwindow"));
+        ui_sobelwindow->setWindowModality(Qt::ApplicationModal);
         ui_sobelwindow->resize(532, 556);
         verticalLayout = new QVBoxLayout(ui_sobelwindow);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
