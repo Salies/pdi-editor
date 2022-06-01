@@ -30,8 +30,6 @@ void SobelWindow::moveu(int x, int y) {
 		return;
 	}
 
-	QString direcao = "Gx = 0";
-	if (dx[(w * y) + x] != 0)
-		direcao = QString::number((int)(180.0 + std::atan2(dy[(w * y) + x], dx[(w * y) + x]) / M_PI * 180.0)) + '\xb0';
-	ui.mag->setText("<b>mag:</b> " + QString::number(mag[(w * y) + x]) + ", <b>dir:</b> " + direcao);
+	ui.mag->setText("<b>mag:</b> " + QString::number(mag[(w * y) + x]) + ", <b>Gx:</b> " + QString::number(dx[(w * y) + x])
+	+ " <b>Gy:</b> " + QString::number(dy[(w * y) + x]));
 }

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_editor_t {
-    QByteArrayData data[35];
-    char stringdata0[335];
+    QByteArrayData data[34];
+    char stringdata0[330];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -60,13 +60,12 @@ QT_MOC_LITERAL(24, 232, 13), // "laplaciano4x4"
 QT_MOC_LITERAL(25, 246, 5), // "sobel"
 QT_MOC_LITERAL(26, 252, 3), // "drc"
 QT_MOC_LITERAL(27, 256, 9), // "limiariza"
-QT_MOC_LITERAL(28, 266, 4), // "llim"
-QT_MOC_LITERAL(29, 271, 11), // "janelaSobre"
-QT_MOC_LITERAL(30, 283, 17), // "copiaParaEsquerda"
-QT_MOC_LITERAL(31, 301, 16), // "converterRGB_HSL"
-QT_MOC_LITERAL(32, 318, 12), // "atualizarPos"
-QT_MOC_LITERAL(33, 331, 1), // "x"
-QT_MOC_LITERAL(34, 333, 1) // "y"
+QT_MOC_LITERAL(28, 266, 11), // "janelaSobre"
+QT_MOC_LITERAL(29, 278, 17), // "copiaParaEsquerda"
+QT_MOC_LITERAL(30, 296, 16), // "converterRGB_HSL"
+QT_MOC_LITERAL(31, 313, 12), // "atualizarPos"
+QT_MOC_LITERAL(32, 326, 1), // "x"
+QT_MOC_LITERAL(33, 328, 1) // "y"
 
     },
     "editor\0abrir\0\0salvar\0sair\0converteParaCinza\0"
@@ -76,7 +75,7 @@ QT_MOC_LITERAL(34, 333, 1) // "y"
     "mHeight\0convolucao\0float*\0matriz\0"
     "std::function<void(int*)>\0f\0int*\0out\0"
     "binariza\0laplaciano4x4\0sobel\0drc\0"
-    "limiariza\0llim\0janelaSobre\0copiaParaEsquerda\0"
+    "limiariza\0janelaSobre\0copiaParaEsquerda\0"
     "converterRGB_HSL\0atualizarPos\0x\0y"
 };
 #undef QT_MOC_LITERAL
@@ -87,7 +86,7 @@ static const uint qt_meta_data_editor[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      25,   14, // methods
+      24,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -95,31 +94,30 @@ static const uint qt_meta_data_editor[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  139,    2, 0x08 /* Private */,
-       3,    0,  140,    2, 0x08 /* Private */,
-       4,    0,  141,    2, 0x08 /* Private */,
-       5,    0,  142,    2, 0x08 /* Private */,
-       6,    0,  143,    2, 0x08 /* Private */,
-       7,    0,  144,    2, 0x08 /* Private */,
-       8,    0,  145,    2, 0x08 /* Private */,
-       9,    0,  146,    2, 0x08 /* Private */,
-      10,    0,  147,    2, 0x08 /* Private */,
-      11,    0,  148,    2, 0x08 /* Private */,
-      12,    0,  149,    2, 0x08 /* Private */,
-      13,    2,  150,    2, 0x08 /* Private */,
-      16,    3,  155,    2, 0x08 /* Private */,
-      16,    4,  162,    2, 0x08 /* Private */,
-      16,    4,  171,    2, 0x08 /* Private */,
-      23,    0,  180,    2, 0x08 /* Private */,
-      24,    0,  181,    2, 0x08 /* Private */,
-      25,    0,  182,    2, 0x08 /* Private */,
-      26,    0,  183,    2, 0x08 /* Private */,
-      27,    0,  184,    2, 0x08 /* Private */,
-      28,    0,  185,    2, 0x08 /* Private */,
-      29,    0,  186,    2, 0x08 /* Private */,
-      30,    0,  187,    2, 0x08 /* Private */,
-      31,    0,  188,    2, 0x08 /* Private */,
-      32,    2,  189,    2, 0x08 /* Private */,
+       1,    0,  134,    2, 0x08 /* Private */,
+       3,    0,  135,    2, 0x08 /* Private */,
+       4,    0,  136,    2, 0x08 /* Private */,
+       5,    0,  137,    2, 0x08 /* Private */,
+       6,    0,  138,    2, 0x08 /* Private */,
+       7,    0,  139,    2, 0x08 /* Private */,
+       8,    0,  140,    2, 0x08 /* Private */,
+       9,    0,  141,    2, 0x08 /* Private */,
+      10,    0,  142,    2, 0x08 /* Private */,
+      11,    0,  143,    2, 0x08 /* Private */,
+      12,    0,  144,    2, 0x08 /* Private */,
+      13,    2,  145,    2, 0x08 /* Private */,
+      16,    3,  150,    2, 0x08 /* Private */,
+      16,    4,  157,    2, 0x08 /* Private */,
+      16,    4,  166,    2, 0x08 /* Private */,
+      23,    0,  175,    2, 0x08 /* Private */,
+      24,    0,  176,    2, 0x08 /* Private */,
+      25,    0,  177,    2, 0x08 /* Private */,
+      26,    0,  178,    2, 0x08 /* Private */,
+      27,    0,  179,    2, 0x08 /* Private */,
+      28,    0,  180,    2, 0x08 /* Private */,
+      29,    0,  181,    2, 0x08 /* Private */,
+      30,    0,  182,    2, 0x08 /* Private */,
+      31,    2,  183,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -145,8 +143,7 @@ static const uint qt_meta_data_editor[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   33,   34,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   32,   33,
 
        0        // eod
 };
@@ -177,11 +174,10 @@ void editor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 17: _t->sobel(); break;
         case 18: _t->drc(); break;
         case 19: _t->limiariza(); break;
-        case 20: _t->llim(); break;
-        case 21: _t->janelaSobre(); break;
-        case 22: _t->copiaParaEsquerda(); break;
-        case 23: _t->converterRGB_HSL(); break;
-        case 24: _t->atualizarPos((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 20: _t->janelaSobre(); break;
+        case 21: _t->copiaParaEsquerda(); break;
+        case 22: _t->converterRGB_HSL(); break;
+        case 23: _t->atualizarPos((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -216,13 +212,13 @@ int editor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 25)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 25;
+        _id -= 24;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 25)
+        if (_id < 24)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 25;
+        _id -= 24;
     }
     return _id;
 }

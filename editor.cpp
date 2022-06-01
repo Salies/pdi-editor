@@ -375,14 +375,14 @@ void editor::sobel() {
 }
 
 void editor::drc() {
-    float c = 1.0f, gamma = 0.4f;
+    float c = 1.0f, gamma = 1.4f;
 
     imgB = img.copy();
     uchar* bits = nullptr;
     for (int j = 0; j < img.height(); j++) {
         bits = imgB.scanLine(j);
         for (int i = 0; i < img.width(); i++)
-            bits[i] = (int)std::pow(c * bits[i], gamma);
+            bits[i] = std::min(std::max(0, (int)(c * std::pow(bits[i], gamma))), 255);
     }
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
