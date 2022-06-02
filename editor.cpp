@@ -5,6 +5,7 @@
 #include "histoEq.h"
 #include "SobelWindow.h"
 #include "ui_limiariza.h"
+#include "ui_dsc.h"
 #include <random>
 #include <algorithm>
 #include <functional>
@@ -346,6 +347,16 @@ void editor::laplaciano4x4() {
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
+void editor::normaliza(int* in, int max, int min, QImage& out) {
+    uchar* bits = nullptr;
+    int h = out.height(), w = out.width();
+    for (int j = 1; j < h - 1; j++) {
+        bits = out.scanLine(j);
+        for (int i = 1; i < w - 1; i++)
+            bits[i] = ((in[(w * j) + i] - min) / (float)(max - min)) * 255;
+    }
+}
+
 void editor::sobel() {
     int w = img.width(), h = img.height();
     // Não há vazamento de memória.
@@ -367,12 +378,7 @@ void editor::sobel() {
 
     // Normalizando e montando imagem
     imgB = img.copy();
-    uchar* bits = nullptr;
-    for (j = 1; j < h - 1; j++) {
-        bits = imgB.scanLine(j);
-        for (i = 1; i < w - 1; i++)
-            bits[i] = ((mag[(w * j) + i] - min) / (float)(max - min)) * 255;
-    }
+    normaliza(mag, max, min, imgB);
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 
@@ -381,17 +387,35 @@ void editor::sobel() {
 }
 
 void editor::drc() {
-    float c = 1.0f, gamma = 1.4f;
+    QDialog* dialog = new QDialog(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    Ui::dsc_ui uid;
+    uid.setupUi(dialog);
+    connect(uid.okButton, &QPushButton::clicked, this, [=]() {
+        float c = uid.cSpinBox->value(), gamma = uid.gSpinBox->value();
+        int w = img.width(), h = img.height(), max = 0, min = (int)(c * std::pow(img.scanLine(0)[0], gamma));
+        int* comp = new int[w * h];
 
-    imgB = img.copy();
-    uchar* bits = nullptr;
-    for (int j = 0; j < img.height(); j++) {
-        bits = imgB.scanLine(j);
-        for (int i = 0; i < img.width(); i++)
-            bits[i] = std::min(std::max(0, (int)(c * std::pow(bits[i], gamma))), 255);
-    }
+        imgB = img.copy();
+        uchar* bits = nullptr;
+        for (int j = 0; j < h; j++) {
+            bits = img.scanLine(j);
+            for (int i = 0; i < w; i++) {
+                comp[(w * j) + i] = (int)(c * std::pow(bits[i], gamma));
+                if (comp[(w * j) + i] < min)
+                    min = comp[(w * j) + i];
+                if (comp[(w * j) + i] > max)
+                    max = comp[(w * j) + i];
+            }
+        }
 
-    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+        // Aplica a normalização
+        normaliza(comp, max, min, imgB);
+
+        ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+    });
+
+    dialog->show();
 }
 
 void editor::limiariza() {

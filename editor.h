@@ -39,6 +39,7 @@ private slots:
     void sobel();
     void drc();
     void limiariza();
+    void normaliza(int *in, int max, int min, QImage& out);
     // Ajuda
     void janelaSobre();
     // Outros

@@ -100,6 +100,7 @@
     <QtRcc Include="editor.qrc" />
     <QtUic Include="conv_hsl.ui" />
     <QtUic Include="divideRGB.ui" />
+    <QtUic Include="dsc.ui" />
     <QtUic Include="editor.ui" />
     <QtMoc Include="editor.h" />
     <ClCompile Include="divideRGB.cpp" />
