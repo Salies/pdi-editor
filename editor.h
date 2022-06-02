@@ -40,6 +40,7 @@ private slots:
     void drc();
     void limiariza();
     void normaliza(int *in, int max, int min, QImage& out);
+    void drc_fc(float c, float gamma);
     // Ajuda
     void janelaSobre();
     // Outros

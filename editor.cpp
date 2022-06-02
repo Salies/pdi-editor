@@ -348,11 +348,13 @@ void editor::laplaciano4x4() {
 }
 
 void editor::normaliza(int* in, int max, int min, QImage& out) {
+    if (max == min) return;
+
     uchar* bits = nullptr;
     int h = out.height(), w = out.width();
-    for (int j = 1; j < h - 1; j++) {
+    for (int j = 0; j < h; j++) {
         bits = out.scanLine(j);
-        for (int i = 1; i < w - 1; i++)
+        for (int i = 0; i < w; i++)
             bits[i] = ((in[(w * j) + i] - min) / (float)(max - min)) * 255;
     }
 }
@@ -391,31 +393,35 @@ void editor::drc() {
     dialog->setAttribute(Qt::WA_DeleteOnClose, true);
     Ui::dsc_ui uid;
     uid.setupUi(dialog);
+
     connect(uid.okButton, &QPushButton::clicked, this, [=]() {
-        float c = uid.cSpinBox->value(), gamma = uid.gSpinBox->value();
-        int w = img.width(), h = img.height(), max = 0, min = (int)(c * std::pow(img.scanLine(0)[0], gamma));
-        int* comp = new int[w * h];
-
-        imgB = img.copy();
-        uchar* bits = nullptr;
-        for (int j = 0; j < h; j++) {
-            bits = img.scanLine(j);
-            for (int i = 0; i < w; i++) {
-                comp[(w * j) + i] = (int)(c * std::pow(bits[i], gamma));
-                if (comp[(w * j) + i] < min)
-                    min = comp[(w * j) + i];
-                if (comp[(w * j) + i] > max)
-                    max = comp[(w * j) + i];
-            }
-        }
-
-        // Aplica a normalização
-        normaliza(comp, max, min, imgB);
-
-        ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
+        drc_fc(uid.cSpinBox->value(), uid.gSpinBox->value());
     });
 
     dialog->show();
+}
+
+void editor::drc_fc(float c, float gamma) {
+    int w = img.width(), h = img.height(), max = 0, min = (int)(c * std::pow(img.scanLine(0)[0], gamma));
+    int* comp = new int[w * h];
+
+    imgB = img.copy();
+    uchar* bits = nullptr;
+    for (int j = 0; j < h; j++) {
+        bits = img.scanLine(j);
+        for (int i = 0; i < w; i++) {
+            comp[(w * j) + i] = (int)(c * std::pow(bits[i], gamma));
+            if (comp[(w * j) + i] < min)
+                min = comp[(w * j) + i];
+            if (comp[(w * j) + i] > max)
+                max = comp[(w * j) + i];
+        }
+    }
+
+    // Aplica a normalização
+    normaliza(comp, max, min, imgB);
+
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::limiariza() {

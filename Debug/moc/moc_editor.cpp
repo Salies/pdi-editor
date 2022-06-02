@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_editor_t {
-    QByteArrayData data[39];
-    char stringdata0[359];
+    QByteArrayData data[42];
+    char stringdata0[374];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -65,12 +65,15 @@ QT_MOC_LITERAL(29, 276, 2), // "in"
 QT_MOC_LITERAL(30, 279, 3), // "max"
 QT_MOC_LITERAL(31, 283, 3), // "min"
 QT_MOC_LITERAL(32, 287, 7), // "QImage&"
-QT_MOC_LITERAL(33, 295, 11), // "janelaSobre"
-QT_MOC_LITERAL(34, 307, 17), // "copiaParaEsquerda"
-QT_MOC_LITERAL(35, 325, 16), // "converterRGB_HSL"
-QT_MOC_LITERAL(36, 342, 12), // "atualizarPos"
-QT_MOC_LITERAL(37, 355, 1), // "x"
-QT_MOC_LITERAL(38, 357, 1) // "y"
+QT_MOC_LITERAL(33, 295, 6), // "drc_fc"
+QT_MOC_LITERAL(34, 302, 1), // "c"
+QT_MOC_LITERAL(35, 304, 5), // "gamma"
+QT_MOC_LITERAL(36, 310, 11), // "janelaSobre"
+QT_MOC_LITERAL(37, 322, 17), // "copiaParaEsquerda"
+QT_MOC_LITERAL(38, 340, 16), // "converterRGB_HSL"
+QT_MOC_LITERAL(39, 357, 12), // "atualizarPos"
+QT_MOC_LITERAL(40, 370, 1), // "x"
+QT_MOC_LITERAL(41, 372, 1) // "y"
 
     },
     "editor\0abrir\0\0salvar\0sair\0converteParaCinza\0"
@@ -81,7 +84,7 @@ QT_MOC_LITERAL(38, 357, 1) // "y"
     "std::function<void(int*)>\0f\0int*\0out\0"
     "binariza\0laplaciano4x4\0sobel\0drc\0"
     "limiariza\0normaliza\0in\0max\0min\0QImage&\0"
-    "janelaSobre\0copiaParaEsquerda\0"
+    "drc_fc\0c\0gamma\0janelaSobre\0copiaParaEsquerda\0"
     "converterRGB_HSL\0atualizarPos\0x\0y"
 };
 #undef QT_MOC_LITERAL
@@ -92,7 +95,7 @@ static const uint qt_meta_data_editor[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      25,   14, // methods
+      26,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -100,31 +103,32 @@ static const uint qt_meta_data_editor[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  139,    2, 0x08 /* Private */,
-       3,    0,  140,    2, 0x08 /* Private */,
-       4,    0,  141,    2, 0x08 /* Private */,
-       5,    0,  142,    2, 0x08 /* Private */,
-       6,    0,  143,    2, 0x08 /* Private */,
-       7,    0,  144,    2, 0x08 /* Private */,
-       8,    0,  145,    2, 0x08 /* Private */,
-       9,    0,  146,    2, 0x08 /* Private */,
-      10,    0,  147,    2, 0x08 /* Private */,
-      11,    0,  148,    2, 0x08 /* Private */,
-      12,    0,  149,    2, 0x08 /* Private */,
-      13,    2,  150,    2, 0x08 /* Private */,
-      16,    3,  155,    2, 0x08 /* Private */,
-      16,    4,  162,    2, 0x08 /* Private */,
-      16,    4,  171,    2, 0x08 /* Private */,
-      23,    0,  180,    2, 0x08 /* Private */,
-      24,    0,  181,    2, 0x08 /* Private */,
-      25,    0,  182,    2, 0x08 /* Private */,
-      26,    0,  183,    2, 0x08 /* Private */,
-      27,    0,  184,    2, 0x08 /* Private */,
-      28,    4,  185,    2, 0x08 /* Private */,
-      33,    0,  194,    2, 0x08 /* Private */,
-      34,    0,  195,    2, 0x08 /* Private */,
-      35,    0,  196,    2, 0x08 /* Private */,
-      36,    2,  197,    2, 0x08 /* Private */,
+       1,    0,  144,    2, 0x08 /* Private */,
+       3,    0,  145,    2, 0x08 /* Private */,
+       4,    0,  146,    2, 0x08 /* Private */,
+       5,    0,  147,    2, 0x08 /* Private */,
+       6,    0,  148,    2, 0x08 /* Private */,
+       7,    0,  149,    2, 0x08 /* Private */,
+       8,    0,  150,    2, 0x08 /* Private */,
+       9,    0,  151,    2, 0x08 /* Private */,
+      10,    0,  152,    2, 0x08 /* Private */,
+      11,    0,  153,    2, 0x08 /* Private */,
+      12,    0,  154,    2, 0x08 /* Private */,
+      13,    2,  155,    2, 0x08 /* Private */,
+      16,    3,  160,    2, 0x08 /* Private */,
+      16,    4,  167,    2, 0x08 /* Private */,
+      16,    4,  176,    2, 0x08 /* Private */,
+      23,    0,  185,    2, 0x08 /* Private */,
+      24,    0,  186,    2, 0x08 /* Private */,
+      25,    0,  187,    2, 0x08 /* Private */,
+      26,    0,  188,    2, 0x08 /* Private */,
+      27,    0,  189,    2, 0x08 /* Private */,
+      28,    4,  190,    2, 0x08 /* Private */,
+      33,    2,  199,    2, 0x08 /* Private */,
+      36,    0,  204,    2, 0x08 /* Private */,
+      37,    0,  205,    2, 0x08 /* Private */,
+      38,    0,  206,    2, 0x08 /* Private */,
+      39,    2,  207,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -148,10 +152,11 @@ static const uint qt_meta_data_editor[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 21, QMetaType::Int, QMetaType::Int, 0x80000000 | 32,   29,   30,   31,   22,
+    QMetaType::Void, QMetaType::Float, QMetaType::Float,   34,   35,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   37,   38,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   40,   41,
 
        0        // eod
 };
@@ -183,10 +188,11 @@ void editor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 18: _t->drc(); break;
         case 19: _t->limiariza(); break;
         case 20: _t->normaliza((*reinterpret_cast< int*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< QImage(*)>(_a[4]))); break;
-        case 21: _t->janelaSobre(); break;
-        case 22: _t->copiaParaEsquerda(); break;
-        case 23: _t->converterRGB_HSL(); break;
-        case 24: _t->atualizarPos((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 21: _t->drc_fc((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2]))); break;
+        case 22: _t->janelaSobre(); break;
+        case 23: _t->copiaParaEsquerda(); break;
+        case 24: _t->converterRGB_HSL(); break;
+        case 25: _t->atualizarPos((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -221,13 +227,13 @@ int editor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 25)
+        if (_id < 26)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 25;
+        _id -= 26;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 25)
+        if (_id < 26)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 25;
+        _id -= 26;
     }
     return _id;
 }
