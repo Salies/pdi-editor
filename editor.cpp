@@ -60,6 +60,9 @@ void editor::abrir() {
     QString arquivoEscolhido = QFileDialog::getOpenFileName(
         this, tr("Abrir imagem"), "", tr("Bitmap (*bmp);;Todos os arquivos (*)")
     );
+
+    if (arquivoEscolhido.isEmpty()) return;
+
     img.load(arquivoEscolhido);
 
     // Algumas imagens escala de cinza não são interpretadas como tais pelo Qt.
