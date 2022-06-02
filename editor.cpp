@@ -179,6 +179,7 @@ void editor::media3x3() {
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
+// Convolução sem normalização
 void editor::convolucao(float *matriz, int mWidth, int mHeight) {
     imgB = img.copy();
 
@@ -209,7 +210,7 @@ void editor::convolucao(float *matriz, int mWidth, int mHeight) {
     }
 }
 
-// Versão overloaded de convolucao() para quando os valores precisam de algum tratamento,
+// Convolução para quando os valores precisam de alguma normalização pontual.
 // representado aqui pelo parâmetro f. Ex.: no filtro Laplaciano f(x) = |x| / 8.
 void editor::convolucao(float* matriz, int mWidth, int mHeight, std::function<void(int*)> f) {
     imgB = img.copy();
@@ -242,6 +243,8 @@ void editor::convolucao(float* matriz, int mWidth, int mHeight, std::function<vo
     }
 }
 
+// Convolução que envia os resultados para out.
+// Útil em casos onde os valores não normalizados possuem utilidade (ex.: Sobel).
 void editor::convolucao(float* matriz, int mWidth, int mHeight, int *out) {
     const int imgWidth = img.width(), imgHeight = img.height(),
         mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
