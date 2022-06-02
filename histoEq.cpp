@@ -35,7 +35,7 @@ void histoEq::eq() {
 
 	for (i = 0; i < 256; i++) {
 		freq_acc += h[i];
-		lut[i] = (uchar)(freq_acc * escala);
+		lut[i] = std::max(0, (uchar)(freq_acc * escala) - 1);
 	}
 
 	uchar* bits = nullptr;

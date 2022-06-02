@@ -9,18 +9,18 @@ QMAKE_CXX.INCDIRS = \
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\include" \
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\atlmfc\\include" \
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\include" \
-    "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt" \
+    "D:\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt" \
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include" \
-    "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um" \
-    "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared" \
-    "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt" \
-    "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt" \
+    "D:\\Windows Kits\\10\\Include\\10.0.19041.0\\um" \
+    "D:\\Windows Kits\\10\\Include\\10.0.19041.0\\shared" \
+    "D:\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt" \
+    "D:\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt" \
     "C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um"
 QMAKE_CXX.LIBDIRS = \
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\lib\\x86" \
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\atlmfc\\lib\\x86" \
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\lib\\x86" \
-    "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.19041.0\\ucrt\\x86" \
+    "D:\\Windows Kits\\10\\lib\\10.0.19041.0\\ucrt\\x86" \
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\UnitTest\\lib" \
-    "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.19041.0\\um\\x86" \
+    "D:\\Windows Kits\\10\\lib\\10.0.19041.0\\um\\x86" \
     "C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\lib\\um\\x86"
