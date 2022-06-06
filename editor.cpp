@@ -68,7 +68,10 @@ void editor::abrir() {
 
     // Algumas imagens escala de cinza não são interpretadas como tais pelo Qt.
     // Isto é corrigido aqui.
-    if (img.allGray() && img.format() != QImage::Format_Grayscale8)
+    // Formatos podem ser "estranhos", converter para um seguro
+    img = img.convertToFormat(QImage::Format_RGB32);
+
+    if (img.allGray() || img.isGrayscale())
         img = img.convertToFormat(QImage::Format_Grayscale8);
 
     // Redimensionando o QLabel para que ele exiba toda a imagem
