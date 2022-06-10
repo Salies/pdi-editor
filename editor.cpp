@@ -466,6 +466,7 @@ void editor::copiaParaEsquerda() {
         ui.menuOperacoes_img_colorida->setEnabled(false);
         ui.menu_Operacoes->setEnabled(true);
     }
+    ui.label_img1->setFixedSize(img.width(), img.height());
     ui.label_img1->setPixmap(*ui.label_img2->pixmap());
 }
 
