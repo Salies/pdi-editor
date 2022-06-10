@@ -59,6 +59,8 @@ public:
     QMenu *menu_Operacoes;
     QMenu *menuAjuda;
     QMenu *menuOutros;
+    QMenu *menuOperacoes_img_colorida;
+    QMenu *menuOutras_operacoes;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *editorClass)
@@ -156,7 +158,7 @@ public:
         editorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(editorClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1196, 21));
+        menuBar->setGeometry(QRect(0, 0, 1196, 22));
         menu_Arquivo = new QMenu(menuBar);
         menu_Arquivo->setObjectName(QString::fromUtf8("menu_Arquivo"));
         menu_Operacoes = new QMenu(menuBar);
@@ -165,6 +167,10 @@ public:
         menuAjuda->setObjectName(QString::fromUtf8("menuAjuda"));
         menuOutros = new QMenu(menuBar);
         menuOutros->setObjectName(QString::fromUtf8("menuOutros"));
+        menuOperacoes_img_colorida = new QMenu(menuBar);
+        menuOperacoes_img_colorida->setObjectName(QString::fromUtf8("menuOperacoes_img_colorida"));
+        menuOutras_operacoes = new QMenu(menuBar);
+        menuOutras_operacoes->setObjectName(QString::fromUtf8("menuOutras_operacoes"));
         editorClass->setMenuBar(menuBar);
         statusBar = new QStatusBar(editorClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -172,6 +178,8 @@ public:
 
         menuBar->addAction(menu_Arquivo->menuAction());
         menuBar->addAction(menu_Operacoes->menuAction());
+        menuBar->addAction(menuOperacoes_img_colorida->menuAction());
+        menuBar->addAction(menuOutras_operacoes->menuAction());
         menuBar->addAction(menuOutros->menuAction());
         menuBar->addAction(menuAjuda->menuAction());
         menu_Arquivo->addAction(action_Abrir);
@@ -188,15 +196,11 @@ public:
         menu_Operacoes->addAction(actionSobel);
         menu_Operacoes->addAction(actionDRC);
         menu_Operacoes->addAction(actionLiminha);
-        menu_Operacoes->addSeparator();
-        menu_Operacoes->addAction(action_paraCinza);
-        menu_Operacoes->addAction(actionInverte_colorida);
-        menu_Operacoes->addSeparator();
-        menu_Operacoes->addAction(actionDividir_RGB);
-        menuAjuda->addAction(actionGuia_b_sico);
-        menuAjuda->addSeparator();
         menuAjuda->addAction(actionSobre);
         menuOutros->addAction(actionConverter_RGB_HSL);
+        menuOperacoes_img_colorida->addAction(action_paraCinza);
+        menuOperacoes_img_colorida->addAction(actionInverte_colorida);
+        menuOutras_operacoes->addAction(actionDividir_RGB);
 
         retranslateUi(editorClass);
 
@@ -229,9 +233,11 @@ public:
         pushButton->setText(QCoreApplication::translate("editorClass", "\360\237\241\204", nullptr));
         label_img2->setText(QString());
         menu_Arquivo->setTitle(QCoreApplication::translate("editorClass", "&Arquivo", nullptr));
-        menu_Operacoes->setTitle(QCoreApplication::translate("editorClass", "&Opera\303\247\303\265es", nullptr));
+        menu_Operacoes->setTitle(QCoreApplication::translate("editorClass", "&Opera\303\247\303\265es (cinza)", nullptr));
         menuAjuda->setTitle(QCoreApplication::translate("editorClass", "Ajuda", nullptr));
         menuOutros->setTitle(QCoreApplication::translate("editorClass", "Utilit\303\241rios", nullptr));
+        menuOperacoes_img_colorida->setTitle(QCoreApplication::translate("editorClass", "Opera\303\247\303\265es (colorida)", nullptr));
+        menuOutras_operacoes->setTitle(QCoreApplication::translate("editorClass", "Outras opera\303\247\303\265es", nullptr));
     } // retranslateUi
 
 };

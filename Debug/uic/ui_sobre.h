@@ -40,7 +40,7 @@ public:
 
     void retranslateUi(QDialog *Sobre)
     {
-        Sobre->setWindowTitle(QCoreApplication::translate("Sobre", "Form", nullptr));
+        Sobre->setWindowTitle(QCoreApplication::translate("Sobre", "Sobre", nullptr));
         label->setText(QCoreApplication::translate("Sobre", "2022 - Daniel Serezane.\n"
 "Editor b\303\241sico de imagens. Constru\303\255do durante a disciplina de Processamento Digital de Imagens, ministrada na FCT-UNESP.", nullptr));
     } // retranslateUi

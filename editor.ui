@@ -121,7 +121,7 @@
      <x>0</x>
      <y>0</y>
      <width>1196</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Arquivo">
@@ -135,7 +135,7 @@
    </widget>
    <widget class="QMenu" name="menu_Operacoes">
     <property name="title">
-     <string>&amp;Operações</string>
+     <string>&amp;Operações (cinza)</string>
     </property>
     <addaction name="actionInverte_cinza"/>
     <addaction name="actionEqualizarHistograma"/>
@@ -147,18 +147,11 @@
     <addaction name="actionSobel"/>
     <addaction name="actionDRC"/>
     <addaction name="actionLiminha"/>
-    <addaction name="separator"/>
-    <addaction name="action_paraCinza"/>
-    <addaction name="actionInverte_colorida"/>
-    <addaction name="separator"/>
-    <addaction name="actionDividir_RGB"/>
    </widget>
    <widget class="QMenu" name="menuAjuda">
     <property name="title">
      <string>Ajuda</string>
     </property>
-    <addaction name="actionGuia_b_sico"/>
-    <addaction name="separator"/>
     <addaction name="actionSobre"/>
    </widget>
    <widget class="QMenu" name="menuOutros">
@@ -167,8 +160,23 @@
     </property>
     <addaction name="actionConverter_RGB_HSL"/>
    </widget>
+   <widget class="QMenu" name="menuOperacoes_img_colorida">
+    <property name="title">
+     <string>Operações (colorida)</string>
+    </property>
+    <addaction name="action_paraCinza"/>
+    <addaction name="actionInverte_colorida"/>
+   </widget>
+   <widget class="QMenu" name="menuOutras_operacoes">
+    <property name="title">
+     <string>Outras operações</string>
+    </property>
+    <addaction name="actionDividir_RGB"/>
+   </widget>
    <addaction name="menu_Arquivo"/>
    <addaction name="menu_Operacoes"/>
+   <addaction name="menuOperacoes_img_colorida"/>
+   <addaction name="menuOutras_operacoes"/>
    <addaction name="menuOutros"/>
    <addaction name="menuAjuda"/>
   </widget>
