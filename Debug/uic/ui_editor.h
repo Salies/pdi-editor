@@ -80,6 +80,7 @@ public:
         actionDividir_RGB->setObjectName(QString::fromUtf8("actionDividir_RGB"));
         actionInverte_cinza = new QAction(editorClass);
         actionInverte_cinza->setObjectName(QString::fromUtf8("actionInverte_cinza"));
+        actionInverte_cinza->setEnabled(true);
         actionInverte_colorida = new QAction(editorClass);
         actionInverte_colorida->setObjectName(QString::fromUtf8("actionInverte_colorida"));
         actionSalvar = new QAction(editorClass);
@@ -163,12 +164,14 @@ public:
         menu_Arquivo->setObjectName(QString::fromUtf8("menu_Arquivo"));
         menu_Operacoes = new QMenu(menuBar);
         menu_Operacoes->setObjectName(QString::fromUtf8("menu_Operacoes"));
+        menu_Operacoes->setEnabled(false);
         menuAjuda = new QMenu(menuBar);
         menuAjuda->setObjectName(QString::fromUtf8("menuAjuda"));
         menuOutros = new QMenu(menuBar);
         menuOutros->setObjectName(QString::fromUtf8("menuOutros"));
         menuOperacoes_img_colorida = new QMenu(menuBar);
         menuOperacoes_img_colorida->setObjectName(QString::fromUtf8("menuOperacoes_img_colorida"));
+        menuOperacoes_img_colorida->setEnabled(false);
         menuOutras_operacoes = new QMenu(menuBar);
         menuOutras_operacoes->setObjectName(QString::fromUtf8("menuOutras_operacoes"));
         editorClass->setMenuBar(menuBar);

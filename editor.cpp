@@ -70,9 +70,14 @@ void editor::abrir() {
     // Isto é corrigido aqui.
     // Formatos podem ser "estranhos", converter para um seguro
     img = img.convertToFormat(QImage::Format_RGB32);
+    ui.menuOperacoes_img_colorida->setEnabled(true);
+    ui.menu_Operacoes->setEnabled(false);
 
-    if (img.allGray() || img.isGrayscale())
+    if (img.allGray() || img.isGrayscale()) {
         img = img.convertToFormat(QImage::Format_Grayscale8);
+        ui.menuOperacoes_img_colorida->setEnabled(false);
+        ui.menu_Operacoes->setEnabled(true);
+    }
 
     // Redimensionando o QLabel para que ele exiba toda a imagem
     ui.label_img1->setFixedSize(img.width(), img.height());
@@ -456,6 +461,11 @@ void editor::janelaSobre() {
 void editor::copiaParaEsquerda() {
     if (imgB.isNull()) return;
     img = imgB.copy();
+    if (img.allGray() || img.isGrayscale()) {
+        img = img.convertToFormat(QImage::Format_Grayscale8);
+        ui.menuOperacoes_img_colorida->setEnabled(false);
+        ui.menu_Operacoes->setEnabled(true);
+    }
     ui.label_img1->setPixmap(*ui.label_img2->pixmap());
 }
 
