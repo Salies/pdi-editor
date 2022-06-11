@@ -1,0 +1,3 @@
+[submodule "slithice"]
+	path = slithice
+	url = https://github.com/Salies/slithice.git
