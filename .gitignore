@@ -37,6 +37,7 @@ Debug
 Release
 *.vcxproj.user
 *.vcxproj.filters
+UpgradeLog.htm
 
 # Dependencies
 dep
