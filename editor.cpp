@@ -115,7 +115,6 @@ void editor::inverteColorido() {
 void editor::dividirRGB() {
     divideRGB* d = new divideRGB(img);
     d->show();
-    delete d;
 }
 
 void editor::equalizarHistograma() {
@@ -123,7 +122,6 @@ void editor::equalizarHistograma() {
 
     histoEq* eq = new histoEq(img, imgB, ui.label_img2);
     eq->show();
-    delete eq;
 }
 
 void editor::addSaltPepper() {
