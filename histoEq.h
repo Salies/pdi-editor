@@ -10,14 +10,14 @@ class histoEq :
 {
     Q_OBJECT
 public:
-    histoEq(const QImage& img, QImage* imgSaida, QLabel *labelSaida, QWidget* parent = Q_NULLPTR);
+    histoEq(const QImage& img, QImage &imgSaida, QLabel *labelSaida, QWidget* parent = Q_NULLPTR);
 private:
     Ui::histoEq ui;
     void eq();
     void plot();
     std::vector<double> h; // formato double é necessário para plotar
-    QImage *img_eq;
+    QImage img_eq;
     QLabel* label_eq;
-    QwtPlotBarChart* barra;
+    QwtPlotBarChart barra;
 };
 

@@ -6,17 +6,9 @@
 #include "SobelWindow.h"
 #include "ui_limiariza.h"
 #include "ui_dsc.h"
-#include <random>
-#include <algorithm>
-#include <functional>
 #include <QFileDialog>
-#include <cmath>
 
-#include <qwt_plot.h>
-#include <qwt_plot_barchart.h>
-#include <qwt_plot_curve.h>
-
-#include <QDebug>
+#include "slithice/slithice.h"
 
 editor::editor(QWidget *parent)
     : QMainWindow(parent)
@@ -50,7 +42,7 @@ editor::editor(QWidget *parent)
     connect(ui.actionMedia3x3, &QAction::triggered, this, &editor::media3x3);
     connect(ui.actionMediana3x3, &QAction::triggered, this, &editor::mediana3x3);
     connect(ui.actionBinariza, &QAction::triggered, this, &editor::binariza);
-    connect(ui.actionLaplaciano4x4, &QAction::triggered, this, &editor::laplaciano4x4);
+    connect(ui.actionLaplaciano, &QAction::triggered, this, &editor::laplaciano);
     connect(ui.actionSobel, &QAction::triggered, this, &editor::sobel);
     connect(ui.actionDRC, &QAction::triggered, this, &editor::drc);
     connect(ui.actionLiminha, &QAction::triggered, this, &editor::limiariza);
@@ -66,13 +58,13 @@ void editor::abrir() {
 
     img.load(arquivoEscolhido);
 
-    // Algumas imagens escala de cinza não são interpretadas como tais pelo Qt.
-    // Isto é corrigido aqui.
-    // Formatos podem ser "estranhos", converter para um seguro
+    // Formatos podem ser "estranhos", converter para um seguro (RGB32).
     img = img.convertToFormat(QImage::Format_RGB32);
     ui.menuOperacoes_img_colorida->setEnabled(true);
     ui.menu_Operacoes->setEnabled(false);
 
+    // Algumas imagens escala de cinza não são interpretadas como tais pelo Qt.
+    // Isto é corrigido aqui.
     if (img.allGray() || img.isGrayscale()) {
         img = img.convertToFormat(QImage::Format_Grayscale8);
         ui.menuOperacoes_img_colorida->setEnabled(false);
@@ -96,275 +88,73 @@ void editor::sair() {
 }
 
 // Operações
-
-// Nesta função: por que castar para QRgb? Pois a ordem de RGB
-// muda de acordo com a ordem de bytes da máquina. Logo, é melhor
-// deixar o Qt responsável por determiná-la. Isso (casting) não é
-// necessário nas funções p/ imagens em escala de cinza, visto que
-// guardam apenas uma cor por byte, ou seja, independem de ordem
-// (o vetor é sempre a imagem linearizada).
 void editor::converteParaCinza() {
     if (img.isGrayscale()) return;
 
-    imgB = img.copy();
-    uchar cinza;
-    QRgb* data;
-    for (int j = 0; j < img.height(); j++) {
-        data = (QRgb*)(imgB.scanLine(j));
-        for (int i = 0; i < img.width(); i++) {
-            cinza = (qRed(data[i]) + qGreen(data[i]) + qBlue(data[i])) / 3;
-            data[i] = qRgb(cinza, cinza, cinza);
-        }
-    }
-
-    imgB = imgB.convertToFormat(QImage::Format_Grayscale8);
-
+    imgB = QImage(img.width(), img.height(), QImage::Format_Grayscale8);
+    slithice::to_grayscale(img, imgB);
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::inverteCinza() {
     if (!img.isGrayscale()) return;
 
-    imgB = img.copy();
-    uchar* bits = nullptr;
-
-    for (int j = 0; j < img.height(); j++) {
-        bits = imgB.scanLine(j);
-        for (int i = 0; i < img.width(); i++)
-            bits[i] = 255 - bits[i];
-    }
-
+    imgB = QImage(img.width(), img.height(), QImage::Format_Grayscale8);
+    slithice::invert_gray(img, imgB);
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::inverteColorido() {
     if (img.isGrayscale()) return;
 
-    imgB = img.copy();
-    QRgb* data;
-    for (int j = 0; j < img.height(); j++) {
-        data = (QRgb*)(imgB.scanLine(j));
-        for (int i = 0; i < img.width(); i++)
-            data[i] = qRgb(255 - qRed(data[i]), 255 - qGreen(data[i]), 255 - qBlue(data[i]));
-    }
-
+    imgB = QImage(img.width(), img.height(), QImage::Format_RGB32);
+    slithice::invert(img, imgB);
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::dividirRGB() {
     divideRGB* d = new divideRGB(img);
     d->show();
+    delete d;
 }
 
 void editor::equalizarHistograma() {
     if (!img.isGrayscale()) return;
 
-    histoEq* eq = new histoEq(img, &imgB, ui.label_img2);
+    histoEq* eq = new histoEq(img, imgB, ui.label_img2);
     eq->show();
+    delete eq;
 }
 
 void editor::addSaltPepper() {
     if (!img.isGrayscale()) return;
 
-    imgB = img.copy();
-    int size = img.width() * img.height();
-    int cores[2] = { 0, 255 };
-    uchar* bits = imgB.scanLine(0);
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, size - 1);
-    std::uniform_int_distribution<> distCor(0, 1);
-
-    for (int i = 0; i < size / 10; i++)
-        bits[dist(gen)] = cores[distCor(gen)];
-
+    slithice::add_salt_pepper(img, imgB);
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::media3x3() {
     float cte = 1.0f / 9.0f;
     float media[] = { cte, cte, cte, cte, cte, cte, cte, cte, cte };
-    convolucao(media, 3, 3);
-    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
-}
-
-// Convolução sem normalização
-void editor::convolucao(float *matriz, int mWidth, int mHeight) {
-    imgB = img.copy();
-
-    const int imgWidth = img.width(), imgHeight = img.height(),
-        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
-    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, accCor; // (áté accCor) atribui 0 só pra não dar erro de "memória não incilizada"
-    uchar* bitsB = nullptr, *bits = nullptr;
-
-    for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
-        bitsB = imgB.scanLine(j);
-        for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
-            accCor = 0;
-            for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
-                // a matriz de covolução será "espelhada"
-                offsetJ = mHeight - mj - 1;
-                limJ = j + mCentroI - offsetJ;
-                bits = img.scanLine(limJ);
-                for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
-                    offsetI = mWidth - mi - 1;
-                    limI = i + mCentroJ - offsetI;
-                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
-                        accCor += bits[limI] * matriz[(mWidth * offsetJ) + offsetI];
-                    }
-                }
-            }
-            bitsB[i] = accCor;
-        }
-    }
-}
-
-// Convolução para quando os valores precisam de alguma normalização pontual.
-// representado aqui pelo parâmetro f. Ex.: no filtro Laplaciano f(x) = |x| / 8.
-void editor::convolucao(float* matriz, int mWidth, int mHeight, std::function<void(int*)> f) {
-    imgB = img.copy();
-
-    const int imgWidth = img.width(), imgHeight = img.height(),
-        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
-    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, accCor; // (áté accCor) atribui 0 só pra não dar erro de "memória não incilizada"
-    uchar* bitsB = nullptr, * bits = nullptr;
-
-    for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
-        bitsB = imgB.scanLine(j);
-        for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
-            accCor = 0;
-            for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
-                // a matriz de covolução será "espelhada"
-                offsetJ = mHeight - mj - 1;
-                limJ = j + mCentroI - offsetJ;
-                bits = img.scanLine(limJ);
-                for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
-                    offsetI = mWidth - mi - 1;
-                    limI = i + mCentroJ - offsetI;
-                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
-                        accCor += bits[limI] * matriz[(mWidth * offsetJ) + offsetI];
-                    }
-                }
-            }
-            f(&accCor);
-            bitsB[i] = accCor;
-        }
-    }
-}
-
-// Convolução que envia os resultados para out.
-// Útil em casos onde os valores não normalizados possuem utilidade (ex.: Sobel).
-void editor::convolucao(float* matriz, int mWidth, int mHeight, int *out) {
-    const int imgWidth = img.width(), imgHeight = img.height(),
-        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1;
-    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0, accCor; // (áté accCor) atribui 0 só pra não dar erro de "memória não incilizada"
-    uchar* bits = nullptr;
-
-    for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
-        for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
-            accCor = 0;
-            for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
-                // a matriz de covolução será "espelhada"
-                offsetJ = mHeight - mj - 1;
-                limJ = j + mCentroI - offsetJ;
-                bits = img.scanLine(limJ);
-                for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
-                    offsetI = mWidth - mi - 1;
-                    limI = i + mCentroJ - offsetI;
-                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
-                        accCor += bits[limI] * matriz[(mWidth * offsetJ) + offsetI];
-                    }
-                }
-            }
-            out[(imgWidth * j) + i] = accCor;
-        }
-    }
-}
-
-void editor::mediana(int mWidth, int mHeight) {
-    const int imgWidth = img.width(), imgHeight = img.height(),
-        mCentroJ = mWidth >> 1, mCentroI = mHeight >> 1, mCentro = (mWidth * mHeight) >> 1;
-    int offsetJ = 0, offsetI = 0, limJ = 0, limI = 0;
-    int pos; // posição atual do vetor mediana
-    imgB = img.copy();
-    uchar* bits = nullptr, *bitsB = nullptr;
-    std::vector<uchar> mdn(mWidth * mHeight);
-
-    for (int j = mCentroJ; j < imgHeight - mCentroJ; j++) { // p/ cada linha da imagem
-        bitsB = imgB.scanLine(j);
-        for (int i = mCentroI; i < imgWidth - mCentroI; i++) { // p/ cada coluna da imagem
-            pos = 0;
-            for (int mj = 0; mj < mHeight; mj++) { // p/ cada linha da matriz de convolução
-                // a matriz de covolução será "espelhada"
-                offsetJ = mHeight - mj - 1;
-                limJ = j + mCentroI - offsetJ;
-                bits = img.scanLine(limJ);
-                for (int mi = 0; mi < mWidth; mi++) { // p/ cada cluna da matriz de convolução
-                    offsetI = mWidth - mi - 1;
-                    limI = i + mCentroJ - offsetI;
-                    if (limJ >= 0 && limJ < imgHeight && limI >= 0 && limI < imgWidth) {
-                        mdn[pos] = bits[limI];
-                        pos++;
-                    }
-                }
-            }
-            std::sort(mdn.begin(), mdn.end());
-            bitsB[i] = mdn[mCentro];
-        }
-    }
-
+    slithice::convolution(img, media, 3, 3, imgB);
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::mediana3x3() {
-    mediana(3, 3);
+    slithice::median_filter(img, 3, 3, imgB);
+    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::binariza() {
-    imgB = img.copy();
-
-    uchar* bits = nullptr;
-    for (int j = 0; j < img.height(); j++) {
-        bits = imgB.scanLine(j);
-        for (int i = 0; i < img.width(); i++) {
-            if (bits[i] < 128) {
-                bits[i] = 0;
-                continue;
-            }
-            bits[i] = 255;
-        }
-    }
-
+    imgB = QImage(img.width(), img.height(), QImage::Format_Grayscale8);
+    slithice::binarize(img, imgB);
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
-/*void print_matriz(int x, int y, int* m) {
-    QDebug deb = qDebug();
-    int i, j;
-    for (j = 0; j < y; j++) {
-        for (i = 0; i < x; i++) {
-            deb.space() << m[(x * j) + i];
-        }
-        deb.nospace() << "\n";
-    }
-}*/
-
-void editor::laplaciano4x4() {
+void editor::laplaciano() {
     float laplaciano[] = { 0, -1, 0, -1, 4, -1, 0, -1, 0};
-    convolucao(laplaciano, 3, 3, [](int *v) { *v = std::abs( * v) / 8; });
+    slithice::convolution(img, laplaciano, 3, 3, [](int *v) { *v = std::abs( * v) / 8; }, imgB);
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
-}
-
-void editor::normaliza(int* in, int max, int min, QImage& out) {
-    if (max == min) return;
-
-    uchar* bits = nullptr;
-    int h = out.height(), w = out.width();
-    for (int j = 0; j < h; j++) {
-        bits = out.scanLine(j);
-        for (int i = 0; i < w; i++)
-            bits[i] = ((in[(w * j) + i] - min) / (float)(max - min)) * 255;
-    }
 }
 
 void editor::sobel() {
@@ -372,23 +162,7 @@ void editor::sobel() {
     // Não há vazamento de memória.
     // dx, dy e mag são excluídos pelo destrutor de SobelWindow.
     int* dx = new int[w * h], *dy = new int[w * h], *mag = new int[w * h], i, j, max = -256, min = 256;
-    float sobel_x[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1}, sobel_y[] = { -1, -2, -1, 0, 0, 0, 1, 2, 1 };
-    convolucao(sobel_x, 3, 3, dx);
-    convolucao(sobel_y, 3, 3, dy);
-    // Calculando a magnitude e extraindo o máximo e o mínimo
-    for (i = 1; i < w - 1; i++) {
-        for (j = 1; j < h - 1; j++) {
-            mag[(w * j) + i] = (int)std::sqrt((dx[(w * j) + i] * dx[(w * j) + i]) + (dy[(w * j) + i] * dy[(w * j) + i]));
-            if (mag[(w * j) + i] > max)
-                max = mag[(w * j) + i];
-            if (mag[(w * j) + i] < min)
-                min = mag[(w * j) + i];
-        }
-    }
-
-    // Normalizando e montando imagem
-    imgB = img.copy();
-    normaliza(mag, max, min, imgB);
+    slithice::sobel(img, dx, dy, mag, imgB);
 
     ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 
@@ -403,33 +177,12 @@ void editor::drc() {
     uid.setupUi(dialog);
 
     connect(uid.okButton, &QPushButton::clicked, this, [=]() {
-        drc_fc(uid.cSpinBox->value(), uid.gSpinBox->value());
+        imgB = QImage(img.width(), img.height(), QImage::Format_Grayscale8);
+        slithice::dynamic_range_compression(img, uid.cSpinBox->value(), uid.gSpinBox->value(), imgB);
+        ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
     });
 
     dialog->show();
-}
-
-void editor::drc_fc(float c, float gamma) {
-    int w = img.width(), h = img.height(), max = 0, min = (int)(c * std::pow(img.scanLine(0)[0], gamma));
-    int* comp = new int[w * h];
-
-    imgB = img.copy();
-    uchar* bits = nullptr;
-    for (int j = 0; j < h; j++) {
-        bits = img.scanLine(j);
-        for (int i = 0; i < w; i++) {
-            comp[(w * j) + i] = (int)(c * std::pow(bits[i], gamma));
-            if (comp[(w * j) + i] < min)
-                min = comp[(w * j) + i];
-            if (comp[(w * j) + i] > max)
-                max = comp[(w * j) + i];
-        }
-    }
-
-    // Aplica a normalização
-    normaliza(comp, max, min, imgB);
-
-    ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
 }
 
 void editor::limiariza() {
@@ -438,14 +191,7 @@ void editor::limiariza() {
     Ui::ui_lim uid;
     uid.setupUi(dialog);
     connect(uid.okButton, &QPushButton::clicked, this, [=](void) {
-        imgB = img.copy();
-        int limiar = uid.spinBox->value();
-        uchar* bits = nullptr;
-        for (int j = 0; j < img.height(); j++) {
-            bits = imgB.scanLine(j);
-            for (int i = 0; i < img.width(); i++)
-                if (bits[i] < limiar) bits[i] = 0;
-        }
+        slithice::thresholding(img, uid.spinBox->value(), imgB);
         ui.label_img2->setPixmap(QPixmap::fromImage(imgB));
     });
     dialog->show();
@@ -485,10 +231,3 @@ void editor::converterRGB_HSL() {
     conv_hsl* conv = new conv_hsl();
     conv->show();
 }
-
-// TODO DESATIVAR OPÇÕES CINZA SE A IMAGEM FOR CINZA, E VICE VERSA
-// ^^^ AGRUPAR, FICA MAIS FÁCIL DE DESATIVAR
-
-// TODO FAZER BASE DE JANELA COM MODALIDADE E LIMPEZA DE MEMÓRIA
-// ^^ HERANÇA MÚLTIPLA (PRA NÃO ZOAR O DESIGNER)?
-// modalidade não precisa, já tem no designer

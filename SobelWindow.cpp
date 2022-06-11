@@ -1,13 +1,10 @@
 #include "SobelWindow.h"
 #include "mainlabel.h"
-#include <cmath>
-
-# define M_PI 3.14159265358979323846
 
 SobelWindow::~SobelWindow() {
-	delete dx;
-	delete dy;
-	delete mag;
+	delete[] dx;
+	delete[] dy;
+	delete[] mag;
 }
 
 SobelWindow::SobelWindow(QWidget* parent, const QImage &img, int* _mag, int* _dx, int* _dy) {

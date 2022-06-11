@@ -30,17 +30,11 @@ private slots:
     void addSaltPepper();
     void media3x3();
     void mediana3x3();
-    void mediana(int mWidth, int mHeight);
-    void convolucao(float* matriz, int mWidth, int mHeight);
-    void convolucao(float* matriz, int mWidth, int mHeight, std::function<void(int*)> f);
-    void convolucao(float* matriz, int mWidth, int mHeight, int *out);
     void binariza();
-    void laplaciano4x4();
+    void laplaciano();
     void sobel();
     void drc();
     void limiariza();
-    void normaliza(int *in, int max, int min, QImage& out);
-    void drc_fc(float c, float gamma);
     // Ajuda
     void janelaSobre();
     // Outros

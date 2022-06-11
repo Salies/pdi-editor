@@ -21,6 +21,9 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="slithice">
+      <UniqueIdentifier>{922fe975-aa97-44ef-815a-08c5ba02929b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="editor.qrc">
@@ -54,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="SobelWindow.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="slithice\slithice.cpp">
+      <Filter>slithice</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,5 +104,21 @@
     <QtMoc Include="SobelWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="slithice\.gitignore">
+      <Filter>slithice</Filter>
+    </None>
+    <None Include="slithice\LICENSE">
+      <Filter>slithice</Filter>
+    </None>
+    <None Include="slithice\README.md">
+      <Filter>slithice</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="slithice\slithice.h">
+      <Filter>slithice</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

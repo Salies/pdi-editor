@@ -121,7 +121,7 @@
      <x>0</x>
      <y>0</y>
      <width>1196</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Arquivo">
@@ -146,7 +146,7 @@
     <addaction name="actionMedia3x3"/>
     <addaction name="actionMediana3x3"/>
     <addaction name="actionBinariza"/>
-    <addaction name="actionLaplaciano4x4"/>
+    <addaction name="actionLaplaciano"/>
     <addaction name="actionSobel"/>
     <addaction name="actionDRC"/>
     <addaction name="actionLiminha"/>
@@ -252,12 +252,12 @@
   </action>
   <action name="actionMedia3x3">
    <property name="text">
-    <string>Média 3x3</string>
+    <string>Média (3x3)</string>
    </property>
   </action>
   <action name="actionMediana3x3">
    <property name="text">
-    <string>Mediana 3x3</string>
+    <string>Mediana (3x3)</string>
    </property>
   </action>
   <action name="actionBinariza">
@@ -265,9 +265,9 @@
     <string>Binarização</string>
    </property>
   </action>
-  <action name="actionLaplaciano4x4">
+  <action name="actionLaplaciano">
    <property name="text">
-    <string>Laplaciano (3x3)</string>
+    <string>Laplaciano</string>
    </property>
   </action>
   <action name="actionSobel">

@@ -96,6 +96,7 @@
     <ClCompile Include="conv_hsl.cpp" />
     <ClCompile Include="histoEq.cpp" />
     <ClCompile Include="mainlabel.cpp" />
+    <ClCompile Include="slithice\slithice.cpp" />
     <ClCompile Include="SobelWindow.cpp" />
     <QtRcc Include="editor.qrc" />
     <QtUic Include="conv_hsl.ui" />
@@ -128,6 +129,14 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SobelWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="slithice\.gitignore" />
+    <None Include="slithice\LICENSE" />
+    <None Include="slithice\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="slithice\slithice.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

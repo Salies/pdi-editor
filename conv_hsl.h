@@ -11,10 +11,7 @@ public:
 
 private:
     Ui::conv_hsl_class ui;
-    QWidget* mostraCor;
-    void RGBtoHSL(int r, int g, int b, int* h, int* s, int* l);
-    float f(int n, float H, float S, float L);
-    void HSLtoRGB(int h, int s, int l, int* r, int* g, int* b);
+    QWidget mostraCor;
 
 private slots:
     void convertRGBtoHSL();
